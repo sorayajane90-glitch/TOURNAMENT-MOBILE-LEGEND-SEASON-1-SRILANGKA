@@ -142,7 +142,8 @@ footer{text-align:center;color:#718aa0;font-size:11px;padding:28px}
 </section>
 
 <section id="standing" class="content page hidden">
- <div class="titlebar"><div><h2>PERINGKAT GROUP</h2><p>Klasemen dan pemain setiap tim</p></div></div>
+ <div class="titlebar"><div><h2>PERINGKAT GROUP A</h2><p>Klasemen dan pemain setiap tim</p></div></div>
+ <div class="titlebar"><div><h2>PERINGKAT GROUP B</h2><p>Klasemen dan pemain setiap tim</p></div></div>
  <div class="table-wrap"><table><thead><tr><th>#</th><th>Tim</th><th>Pemain</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="standingRows"></tbody></table></div>
 </section>
 
@@ -165,8 +166,8 @@ footer{text-align:center;color:#718aa0;font-size:11px;padding:28px}
 
 <script>
 const teams=[
- ["TEAM AURORA",["AuroraXyze","AuroraRex","AuroraLynx","AuroraSky","AuroraNova"]],
- ["RRQ LEGEND",["RRQZenn","RRQSkylark","RRQAlbert","RRQVyn","RRQPsycho"]],
+ ["TEAM 1",["AuroraXyze","AuroraRex","AuroraLynx","AuroraSky","AuroraNova"]],
+ ["LABA LABA MERAH",["M DWI","MANISHA","DIMAS","ANDREW","PAK ALI"]],
  ["EVOS GLORY",["EVOSBranz","EVOSSutsujin","EVOSDreams","EVOSClaw","EVOSLutpii"]],
  ["ONIC ESPORTS",["ONICKiboy","ONICButsss","ONICCWW","ONICKairi","ONICSanz"]],
  ["ALTER EGO",["AENino","AE Pai","AE Rasy","AE Celiboy","AE Udil"]],
@@ -200,15 +201,15 @@ document.getElementById("groupBTeams").innerHTML=cards(teams.slice(5,10),5);
 document.getElementById("scheduleRows").innerHTML=matches.map((m,i)=>
  `<tr><td>${i+1}</td><td>${m[0]}</td><td>${m[1]}</td><td><b>${m[2]}</b> vs <b>${m[3]}</b></td><td>${m[4]}</td></tr>`).join("");
 
-const wins=[4,3,3,2,2,2,1,1,0,0], losses=[0,1,1,2,2,2,3,3,4,4], pts=[12,10,9,8,7,6,5,4,3,2];
+const wins=[0,0,0,0,0,0,0,0,0,0], losses=[0,0,0,0,0,0,0,0,0,0], pts=[0,0,0,0,0,0,0,0,0,0];
 document.getElementById("standingRows").innerHTML=teams.map((t,i)=>
  `<tr><td><b>${i+1}</b></td><td><b>${t[0]}</b></td><td>${t[1].join(" • ")}</td><td>${wins[i]}</td><td>${losses[i]}</td><td class="pts">${pts[i]}</td></tr>`).join("");
 
 document.getElementById("playoffTeams").innerHTML=cards(teams.slice(0,8));
 
 const semi=[
- [["TEAM AURORA",...teams[0][1]],["EVOS GLORY",...teams[2][1]]],
- [["RRQ LEGEND",...teams[1][1]],["ONIC ESPORTS",...teams[3][1]]]
+ [["TEAM AURORA",...teams[0][0]],["EVOS GLORY",...teams[0][0]]],
+ [["RRQ LEGEND",...teams[0][0]],["ONIC ESPORTS",...teams[0][0]]]
 ];
 document.getElementById("semiGrid").innerHTML=semi.map((m,i)=>`
  <div class="round"><h3>SEMI FINAL ${i+1}</h3>
@@ -261,65 +262,4 @@ footer{text-align:center;color:#718aa0;font-size:11px;padding:28px}
 </style>
 </head>
 <body>
-<header><div class="nav">
-<div class="brand">MOBILE LEGENDS<small>TOURNAMENT • GROUP D</small></div>
-<div class="menu">
-<button class="btn active" data-page="group">👥 GROUP</button>
-<button class="btn" data-page="groupA">🔵 GROUP A</button>
-<button class="btn" data-page="groupB">🔴 GROUP B</button>
-<button class="btn" data-page="schedule">📅 JADWAL</button>
-<button class="btn" data-page="standing">🏆 PERINGKAT GROUP</button>
-<button class="btn" data-page="playoff">⚔️ PLAYOFF</button>
-<button class="btn" data-page="semi">🔥 SEMI FINAL</button>
-<button class="btn" data-page="final">👑 FINAL</button>
-</div></div></header>
-<main>
-<section class="hero"><div><h1>TOURNAMENT <span>MOBILE LEGEND</span>GROUP D</h1><p>10 TEAM • GROUP A & GROUP B • PLAYOFF • 1 CHAMPION</p></div></section>
-
-<section id="group" class="panel page"><div class="heading"><div><h2>GROUP D</h2><p>10 tim peserta dan nama pemain</p></div><span class="badge">10 TEAMS</span></div><div id="all" class="grid"></div></section>
-<section id="groupA" class="panel page hidden"><div class="heading"><div><h2>GROUP A</h2><p>5 tim dan roster pemain</p></div><span class="badge">5 TEAMS</span></div><div id="a" class="grid"></div></section>
-<section id="groupB" class="panel page hidden"><div class="heading"><div><h2>GROUP B</h2><p>5 tim dan roster pemain</p></div><span class="badge">5 TEAMS</span></div><div id="b" class="grid"></div></section>
-<section id="schedule" class="panel page hidden"><div class="heading"><div><h2>JADWAL</h2><p>Jadwal pertandingan Group D</p></div></div><div class="tablebox"><table><thead><tr><th>No</th><th>Tanggal</th><th>Jam</th><th>Pertandingan</th><th>Format</th></tr></thead><tbody id="sched"></tbody></table></div></section>
-<section id="standing" class="panel page hidden"><div class="heading"><div><h2>PERINGKAT GROUP</h2><p>Klasemen dan pemain setiap tim</p></div></div><div class="tablebox"><table><thead><tr><th>#</th><th>Tim</th><th>Pemain</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="stand"></tbody></table></div></section>
-<section id="playoff" class="panel page hidden"><div class="heading"><div><h2>PLAYOFF</h2><p>8 tim lolos menuju fase eliminasi</p></div><span class="badge">TOP 8</span></div><div id="po" class="grid"></div></section>
-<section id="semi" class="panel page hidden"><div class="heading"><div><h2>SEMI FINAL</h2><p>2 pertandingan menuju Grand Final</p></div></div><div id="semis" class="bracket"></div></section>
-<section id="final" class="panel page hidden"><div class="heading"><div><h2>FINAL</h2><p>Grand Final — perebutan gelar juara</p></div></div><div id="fin" class="bracket"></div></section>
-</main><footer>TOURNAMENT MOBILE LEGEND GROUP D • Edit data tim, pemain, jadwal dan hasil di JavaScript.</footer>
-
-<script>
-const teams=[
-["TEAM AURORA",["AuroraXyze","AuroraRex","AuroraLynx","AuroraSky","AuroraNova"]],
-["RRQ LEGEND",["RRQZenn","RRQSkylark","RRQAlbert","RRQVyn","RRQPsycho"]],
-["EVOS GLORY",["EVOSBranz","EVOSSutsujin","EVOSDreams","EVOSClaw","EVOSLutpii"]],
-["ONIC ESPORTS",["ONICKiboy","ONICButsss","ONICCWW","ONICKairi","ONICSanz"]],
-["ALTER EGO",["AENino","AE Pai","AE Rasy","AE Celiboy","AE Udil"]],
-["GEEK FAM",["GEEKReyy","GEEKSanz","GEEKABOY","GEEKBaloyskie","GEEKCadera"]],
-["BIGETRON ALPHA",["BTRKyy","BTRMoreno","BTRSuper Kenn","BTRXorizo","BTRSaken"]],
-["REBELLION ESPORTS",["RBLHaizz","RBLFearless","RBLSwayLow","RBLKorizo","RBLVinzy"]],
-["DEWA UNITED",["DewaLanaya","DewaKyy","DewaWatt","DewaLeo","DewaRizky"]],
-["TEAM LIQUID ID",["TLDAran","TLDFaviann","TLDYhezxkiel","TLDAerron","TLDWidy"]]
-];
-const matches=[
-["18 Sep 2026","13:00","TEAM AURORA","RRQ LEGEND","BO3"],
-["18 Sep 2026","15:00","EVOS GLORY","ONIC ESPORTS","BO3"],
-["18 Sep 2026","17:00","ALTER EGO","GEEK FAM","BO3"],
-["19 Sep 2026","13:00","BIGETRON ALPHA","REBELLION ESPORTS","BO3"],
-["19 Sep 2026","15:00","DEWA UNITED","TEAM LIQUID ID","BO3"],
-["19 Sep 2026","17:00","TEAM AURORA","EVOS GLORY","BO3"],
-["20 Sep 2026","13:00","RRQ LEGEND","ONIC ESPORTS","BO3"],
-["20 Sep 2026","15:00","ALTER EGO","BIGETRON ALPHA","BO3"],
-["20 Sep 2026","17:00","GEEK FAM","DEWA UNITED","BO3"],
-["21 Sep 2026","15:00","REBELLION ESPORTS","TEAM LIQUID ID","BO3"]];
-function cards(list,start=0){return list.map((t,i)=>`<div class="card"><div class="num">#${start+i+1}</div><div class="team">${t[0]}</div>${t[1].map((p,j)=>`<div class="player">${j+1}. ${p}</div>`).join("")}</div>`).join("")}
-all.innerHTML=cards(teams);a.innerHTML=cards(teams.slice(0,5));b.innerHTML=cards(teams.slice(5),5);po.innerHTML=cards(teams.slice(0,8));
-sched.innerHTML=matches.map((m,i)=>`<tr><td>${i+1}</td><td>${m[0]}</td><td>${m[1]}</td><td><b>${m[2]}</b> vs <b>${m[3]}</b></td><td>${m[4]}</td></tr>`).join("");
-const W=[4,3,3,2,2,2,1,1,0,0],L=[0,1,1,2,2,2,3,3,4,4],P=[12,10,9,8,7,6,5,4,3,2];
-stand.innerHTML=teams.map((t,i)=>`<tr><td><b>${i+1}</b></td><td><b>${t[0]}</b></td><td>${t[1].join(" • ")}</td><td>${W[i]}</td><td>${L[i]}</td><td class="pts">${P[i]}</td></tr>`).join("");
-const semi=[[teams[0],teams[2]],[teams[1],teams[3]]];
-semis.innerHTML=semi.map((m,i)=>`<div class="round"><h3>SEMI FINAL ${i+1}</h3><div class="match"><b>${m[0][0]}</b>${m[0][1].map(p=>`<div class="player">${p}</div>`).join("")}<div class="vs">VS</div><b>${m[1][0]}</b>${m[1][1].map(p=>`<div class="player">${p}</div>`).join("")}</div></div>`).join("");
-fin.innerHTML=`<div class="round"><h3>GRAND FINAL</h3><div class="match"><b>PEMENANG SEMI FINAL 1</b><div class="vs">VS</div><b>PEMENANG SEMI FINAL 2</b><div class="vs">BEST OF 5</div></div></div><div class="round champion"><h3>🏆 CHAMPION</h3><div class="match"><b>MENUNGGU HASIL FINAL</b><div class="vs">1 TEAM • 1 TROPHY</div><span style="color:var(--gold)">GRAND CHAMPION</span></div></div><div class="round"><h3>ROSTER FINAL</h3><div class="match"><b>FINALIS A</b><div class="vs">5 PEMAIN</div><b>FINALIS B</b><div class="vs">5 PEMAIN</div></div></div>`;
-document.querySelectorAll(".btn").forEach(x=>x.onclick=()=>{document.querySelectorAll(".btn").forEach(b=>b.classList.remove("active"));x.classList.add("active");document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));document.getElementById(x.dataset.page).classList.remove("hidden");scrollTo({top:0,behavior:"smooth"})});
-</script>
-</body>
-</html>
 
