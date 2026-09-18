@@ -162,7 +162,7 @@ footer{text-align:center;color:#718aa0;font-size:11px;padding:28px}
  <div id="finalGrid" class="bracket"></div>
 </section>
 </main>
-<footer>TOURNAMENT MOBILE LEGEND GROUP D • Demo website • Semua data tim/pemain dapat diedit di JavaScript.</footer>
+<footer>TOURNAMENT MOBILE LEGEND GROUP D SRILANGKA SEASON 1
 
 <script>
 const teams=[
@@ -179,27 +179,25 @@ const teams=[
 ];
 
 const matches=[
- ["18 Sep 2026","13:00","TEAM AURORA","RRQ LEGEND","BO3"],
- ["18 Sep 2026","15:00","EVOS GLORY","ONIC ESPORTS","BO3"],
- ["18 Sep 2026","17:00","ALTER EGO","GEEK FAM","BO3"],
- ["19 Sep 2026","13:00","BIGETRON ALPHA","REBELLION ESPORTS","BO3"],
- ["19 Sep 2026","15:00","DEWA UNITED","TEAM LIQUID ID","BO3"],
- ["19 Sep 2026","17:00","TEAM AURORA","EVOS GLORY","BO3"],
- ["20 Sep 2026","13:00","RRQ LEGEND","ONIC ESPORTS","BO3"],
- ["20 Sep 2026","15:00","ALTER EGO","BIGETRON ALPHA","BO3"],
- ["20 Sep 2026","17:00","GEEK FAM","DEWA UNITED","BO3"],
- ["21 Sep 2026","15:00","REBELLION ESPORTS","TEAM LIQUID ID","BO3"]
+  ["20 Sep 2026","13:00","TEAM AURORA","RRQ LEGEND","BO3"],
+ ["20 Sep 2026","15:00","EVOS GLORY","ONIC ESPORTS","BO3"],
+ ["20 Sep 2026","17:00","ALTER EGO","GEEK FAM","BO3"],
+ ["20 Sep 2026","13:00","BIGETRON ALPHA","REBELLION ESPORTS","BO3"],
+ ["21 Sep 2026","15:00","DEWA UNITED","TEAM LIQUID ID","BO3"],
+ ["21 Sep 2026","17:00","TEAM AURORA","EVOS GLORY","BO3"],
+ ["21 Sep 2026","13:00","RRQ LEGEND","ONIC ESPORTS","BO3"],
+ ["21 Sep 2026","15:00","ALTER EGO","BIGETRON ALPHA","BO3"],
 ];
 
 function cards(list,offset=0){
  return list.map((t,i)=>`<div class="card"><div class="number">#${offset+i+1}</div><div class="team-name">${t[0]}</div>${t[1].map((p,j)=>`<div class="player">${j+1}. ${p}</div>`).join("")}</div>`).join("");
 }
 document.getElementById("allTeams").innerHTML=cards(teams);
-document.getElementById("groupATeams").innerHTML=cards(teams.slice(0,5),0);
-document.getElementById("groupBTeams").innerHTML=cards(teams.slice(5,10),5);
+document.getElementById("groupATeams").innerHTML=cards(teams.slice(1,4,8,9,5);
+document.getElementById("groupBTeams").innerHTML=cards(teams.slice(2,3,5,7,10);
 
 document.getElementById("scheduleRows").innerHTML=matches.map((m,i)=>
- `<tr><td>${i+1}</td><td>${m[0]}</td><td>${m[1]}</td><td><b>${m[2]}</b> vs <b>${m[3]}</b></td><td>${m[4]}</td></tr>`).join("");
+ `<tr><td>${i+1}</td><td>${m[0]}</td><td>${m[0]}</td><td><b>${m[0]}</b> vs <b>${m[0]}</b></td><td>${m[0]}</td></tr>`).join("");
 
 const wins=[0,0,0,0,0,0,0,0,0,0], losses=[0,0,0,0,0,0,0,0,0,0], pts=[0,0,0,0,0,0,0,0,0,0];
 document.getElementById("standingRows").innerHTML=teams.map((t,i)=>
@@ -213,9 +211,9 @@ const semi=[
 ];
 document.getElementById("semiGrid").innerHTML=semi.map((m,i)=>`
  <div class="round"><h3>SEMI FINAL ${i+1}</h3>
-  <div class="match"><b>${m[0][0]}</b>${m[0].slice(1).map(p=>`<div class="player">${p}</div>`).join("")}
+  <div class="match"><b>${m[0][0]}</b>${m[0].slice(0).map(p=>`<div class="player">${p}</div>`).join("")}
    <div class="vs">VS</div>
-   <b>${m[1][0]}</b>${m[1].slice(1).map(p=>`<div class="player">${p}</div>`).join("")}
+   <b>${m[0][0]}</b>${m[1].slice(1).map(p=>`<div class="player">${p}</div>`).join("")}
   </div>
  </div>`).join("");
 
