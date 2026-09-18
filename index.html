@@ -232,56 +232,9 @@ document.querySelectorAll(".nav-btn").forEach(btn=>btn.addEventListener("click",
 }));
 </script>
 </body>
-</html>'''
+</html>
 
-(project / "index.html").write_text(html, encoding="utf-8")
-(project / "vercel.json").write_text('{\n  "cleanUrls": true,\n  "trailingSlash": false\n}\n', encoding="utf-8")
-(project / "README.txt").write_text(
-    "TOURNAMENT MOBILE LEGEND GROUP D\n\n"
-    "Menu: GROUP, GROUP A, GROUP B, JADWAL, PERINGKAT GROUP, PLAYOFF, SEMI FINAL, FINAL.\n"
-    "Upload project ini ke Vercel sebagai static site.\n",
-    encoding="utf-8"
-)
-
-zip_path=Path("/mnt/data/tournament-mobile-legend-group-d-A-B-vercel.zip")
-with zipfile.ZipFile(zip_path,"w",zipfile.ZIP_DEFLATED) as z:
-    for f in project.iterdir():
-        z.write(f,arcname=f.name)
-
-print(f"Created project: {project}")
-print(f"Created ZIP: {zip_path}")
-
-
-It seems like I can’t do more advanced data analysis right now. Please try again later. 
-
-Today 4:15 PM
-
-buat kan html vercel untuk TOURNAMENT MOBILE LEGEND GROUP D
-dengan tampilan menu
-
-GROUP ( jika di klik muncul nama tim dan nama pemain 10 TIM )
-GROUP A 5 TIM ( jika di klik muncul nama tim dan nama pemain 10 TIM )
-GROUP B 5 TIM ( jika di klik muncul nama tim dan nama pemain 10 TIM )
-JADWAL ( jika di klik muncul jadwal tim )
-PERINGKAT GROUP ( jika di klik muncul nama tim pemain setiap tim )
-PLAYOFF ( jika di klik muncul nama tim dan nama pemain )
-SEMI FINAL ( jika di klik muncul nama tim dan nama pemain )
-FINAL ( jika di klik muncul nama tim dan nama pemain )
-
-sama buat kan tampilan nya dengan gambar hero mobile legend ya
-
-Analysis errored
-from pathlib import Path
-import shutil, zipfile
-
-project = Path("/mnt/data/tournament-mobile-legend-group-d-vercel")
-project.mkdir(parents=True, exist_ok=True)
-
-hero = Path("/mnt/data/a_wide_polished_cinematic_esports_tournament_web.png")
-if hero.exists():
-    shutil.copy2(hero, project / "hero-bg.png")
-
-html = r'''<!doctype html>
+<!doctype html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
