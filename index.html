@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TOURNAMENT MOBILE LEGEND — GROUP D</title>
+<meta name="description" content="Tournament Mobile Legend Group D — Group, Group A, Group B, Jadwal, Peringkat, Playoff, Semi Final dan Final.">
+<style>
+:root{
+ --gold:#ffd45a;--gold2:#f4a91f;--blue:#1ca8ff;--cyan:#6eeaff;
+ --bg:#020713;--panel:rgba(3,12,28,.91);--panel2:rgba(5,20,43,.82);
+ --text:#eef7ff;--muted:#9bb4ca;--line:rgba(42,177,255,.45)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;
+ background:#020713 url("hero-bg.png") center top/cover fixed no-repeat;
+ min-height:100vh
+}
+body:after{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:linear-gradient(180deg,rgba(1,5,15,.32),rgba(1,7,18,.86) 55%,#020713 100%)
+}
+.header{
+ position:sticky;top:0;z-index:50;background:rgba(1,7,18,.86);
+ backdrop-filter:blur(15px);border-bottom:1px solid rgba(110,234,255,.22)
+}
+.navbar{max-width:1450px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 16px}
+.logo{min-width:225px;font-weight:1000;letter-spacing:1px;color:var(--gold);line-height:1.05}
+.logo small{display:block;color:#fff;font-size:10px;letter-spacing:3px;margin-top:4px}
+.nav-scroll{overflow-x:auto;display:flex;gap:5px}
+.nav-btn{
+ border:1px solid transparent;background:transparent;color:#dcecff;
+ padding:11px 12px;border-radius:10px;white-space:nowrap;cursor:pointer;
+ font-weight:900;font-size:12px;letter-spacing:.3px
+}
+.nav-btn:hover,.nav-btn.active{
+ color:#fff;border-color:rgba(110,234,255,.55);
+ background:linear-gradient(180deg,rgba(28,168,255,.22),rgba(255,212,90,.08));
+ box-shadow:0 0 22px rgba(28,168,255,.13)
+}
+main{max-width:1450px;margin:auto;padding:24px 16px 70px}
+.hero{
+ min-height:380px;border:1px solid rgba(110,234,255,.3);border-radius:24px;
+ padding:34px;display:flex;align-items:flex-end;overflow:hidden;
+ background:linear-gradient(90deg,rgba(1,7,18,.88),rgba(1,7,18,.25),rgba(1,7,18,.83));
+ box-shadow:0 25px 80px rgba(0,0,0,.5)
+}
+.hero h1{margin:0;font-size:clamp(40px,7vw,92px);line-height:.86;letter-spacing:-3px;text-transform:uppercase;text-shadow:0 5px 28px #000}
+.hero h1 span{display:block;color:var(--gold)}
+.hero p{font-weight:800;letter-spacing:3px;color:#d3e6f7;margin:20px 0 0}
+.content{
+ margin-top:20px;background:var(--panel);border:1px solid rgba(28,168,255,.32);
+ border-radius:20px;padding:22px;box-shadow:0 18px 60px rgba(0,0,0,.45)
+}
+.hidden{display:none}
+.titlebar{display:flex;justify-content:space-between;gap:15px;align-items:flex-end;margin-bottom:18px}
+.titlebar h2{margin:0;color:var(--gold);font-size:28px;text-transform:uppercase}
+.titlebar p{margin:5px 0 0;color:var(--muted)}
+.badge{border:1px solid rgba(255,212,90,.4);color:var(--gold);padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;white-space:nowrap}
+.subtabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.subtab{
+ border:1px solid rgba(28,168,255,.35);background:rgba(3,19,40,.75);color:#cce3f6;
+ border-radius:9px;padding:9px 13px;font-weight:900;cursor:pointer
+}
+.subtab.active{background:rgba(28,168,255,.2);border-color:var(--cyan);color:#fff}
+.team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.card{
+ background:linear-gradient(145deg,rgba(7,29,58,.97),rgba(2,10,25,.97));
+ border:1px solid var(--line);border-radius:14px;padding:15px;min-height:190px;
+ box-shadow:inset 0 0 25px rgba(28,168,255,.04)
+}
+.number{color:var(--gold);font-weight:1000;font-size:12px}
+.team-name{font-size:16px;font-weight:1000;margin:6px 0 11px}
+.player{font-size:12px;color:#d4e7f7;border-top:1px solid rgba(255,255,255,.07);padding:5px 0}
+.table-wrap{overflow:auto;border:1px solid rgba(28,168,255,.27);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:760px;background:rgba(2,9,22,.72)}
+th,td{padding:12px;border-bottom:1px solid rgba(255,255,255,.07);text-align:left}
+th{font-size:11px;letter-spacing:.7px;color:var(--gold);background:rgba(28,168,255,.1)}
+td{font-size:13px;color:#dce9f5}
+.pts{color:var(--cyan);font-weight:1000}
+.bracket{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.round{border:1px solid rgba(28,168,255,.3);background:rgba(2,11,27,.72);border-radius:15px;padding:15px}
+.round h3{margin:0 0 12px;color:var(--gold)}
+.match{border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px;background:rgba(255,255,255,.025);margin:9px 0}
+.vs{font-size:10px;color:var(--muted);padding:6px 0}
+.champion{border-color:rgba(255,212,90,.65);box-shadow:0 0 35px rgba(255,212,90,.11)}
+footer{text-align:center;color:#718aa0;font-size:11px;padding:28px}
+@media(max-width:1120px){.team-grid{grid-template-columns:repeat(3,1fr)}.bracket{grid-template-columns:1fr}}
+@media(max-width:700px){
+ .navbar{align-items:flex-start}.logo{min-width:170px;font-size:15px}.nav-btn{font-size:11px;padding:9px}
+ .hero{min-height:260px;padding:20px}.hero h1{font-size:47px}.hero p{font-size:11px;letter-spacing:1.5px}
+ .content{padding:14px}.team-grid{grid-template-columns:1fr 1fr}.titlebar{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:430px){.team-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header">
+ <div class="navbar">
+  <div class="logo">MOBILE LEGENDS<small>TOURNAMENT • GROUP D</small></div>
+  <div class="nav-scroll">
+   <button class="nav-btn active" data-page="group">👥 GROUP</button>
+   <button class="nav-btn" data-page="groupA">🔵 GROUP A</button>
+   <button class="nav-btn" data-page="groupB">🔴 GROUP B</button>
+   <button class="nav-btn" data-page="schedule">📅 JADWAL</button>
+   <button class="nav-btn" data-page="standing">🏆 PERINGKAT GROUP</button>
+   <button class="nav-btn" data-page="playoff">⚔️ PLAYOFF</button>
+   <button class="nav-btn" data-page="semi">🔥 SEMI FINAL</button>
+   <button class="nav-btn" data-page="final">👑 FINAL</button>
+  </div>
+ </div>
+</header>
+
+<main>
+<section class="hero">
+ <div>
+  <h1>TOURNAMENT <span>MOBILE LEGEND</span>GROUP D</h1>
+  <p>10 TEAM • GROUP A & GROUP B • PLAYOFF • 1 CHAMPION</p>
+ </div>
+</section>
+
+<section id="group" class="content page">
+ <div class="titlebar"><div><h2>GROUP D</h2><p>Daftar lengkap 10 tim peserta dan nama pemain</p></div><span class="badge">10 TEAMS</span></div>
+ <div id="allTeams" class="team-grid"></div>
+</section>
+
+<section id="groupA" class="content page hidden">
+ <div class="titlebar"><div><h2>GROUP A</h2><p>5 tim dan roster pemain</p></div><span class="badge">5 TEAMS</span></div>
+ <div id="groupATeams" class="team-grid"></div>
+</section>
+
+<section id="groupB" class="content page hidden">
+ <div class="titlebar"><div><h2>GROUP B</h2><p>5 tim dan roster pemain</p></div><span class="badge">5 TEAMS</span></div>
+ <div id="groupBTeams" class="team-grid"></div>
+</section>
+
+<section id="schedule" class="content page hidden">
+ <div class="titlebar"><div><h2>JADWAL</h2><p>Jadwal pertandingan Group D</p></div></div>
+ <div class="table-wrap"><table><thead><tr><th>No</th><th>Tanggal</th><th>Jam</th><th>Pertandingan</th><th>Format</th></tr></thead><tbody id="scheduleRows"></tbody></table></div>
+</section>
+
+<section id="standing" class="content page hidden">
+ <div class="titlebar"><div><h2>PERINGKAT GROUP</h2><p>Klasemen dan pemain setiap tim</p></div></div>
+ <div class="table-wrap"><table><thead><tr><th>#</th><th>Tim</th><th>Pemain</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="standingRows"></tbody></table></div>
+</section>
+
+<section id="playoff" class="content page hidden">
+ <div class="titlebar"><div><h2>PLAYOFF</h2><p>8 tim lolos menuju fase eliminasi</p></div><span class="badge">TOP 8</span></div>
+ <div id="playoffTeams" class="team-grid"></div>
+</section>
+
+<section id="semi" class="content page hidden">
+ <div class="titlebar"><div><h2>SEMI FINAL</h2><p>2 pertandingan menuju Grand Final</p></div></div>
+ <div id="semiGrid" class="bracket"></div>
+</section>
+
+<section id="final" class="content page hidden">
+ <div class="titlebar"><div><h2>FINAL</h2><p>Grand Final — perebutan gelar juara</p></div></div>
+ <div id="finalGrid" class="bracket"></div>
+</section>
+</main>
+<footer>TOURNAMENT MOBILE LEGEND GROUP D • Demo website • Semua data tim/pemain dapat diedit di JavaScript.</footer>
+
+<script>
+const teams=[
+ ["TEAM AURORA",["AuroraXyze","AuroraRex","AuroraLynx","AuroraSky","AuroraNova"]],
+ ["RRQ LEGEND",["RRQZenn","RRQSkylark","RRQAlbert","RRQVyn","RRQPsycho"]],
+ ["EVOS GLORY",["EVOSBranz","EVOSSutsujin","EVOSDreams","EVOSClaw","EVOSLutpii"]],
+ ["ONIC ESPORTS",["ONICKiboy","ONICButsss","ONICCWW","ONICKairi","ONICSanz"]],
+ ["ALTER EGO",["AENino","AE Pai","AE Rasy","AE Celiboy","AE Udil"]],
+ ["GEEK FAM",["GEEKReyy","GEEKSanz","GEEKABOY","GEEKBaloyskie","GEEKCadera"]],
+ ["BIGETRON ALPHA",["BTRKyy","BTRMoreno","BTRSuper Kenn","BTRXorizo","BTRSaken"]],
+ ["REBELLION ESPORTS",["RBLHaizz","RBLFearless","RBLSwayLow","RBLKorizo","RBLVinzy"]],
+ ["DEWA UNITED",["DewaLanaya","DewaKyy","DewaWatt","DewaLeo","DewaRizky"]],
+ ["TEAM LIQUID ID",["TLDAran","TLDFaviann","TLDYhezxkiel","TLDAerron","TLDWidy"]]
+];
+
+const matches=[
+ ["18 Sep 2026","13:00","TEAM AURORA","RRQ LEGEND","BO3"],
+ ["18 Sep 2026","15:00","EVOS GLORY","ONIC ESPORTS","BO3"],
+ ["18 Sep 2026","17:00","ALTER EGO","GEEK FAM","BO3"],
+ ["19 Sep 2026","13:00","BIGETRON ALPHA","REBELLION ESPORTS","BO3"],
+ ["19 Sep 2026","15:00","DEWA UNITED","TEAM LIQUID ID","BO3"],
+ ["19 Sep 2026","17:00","TEAM AURORA","EVOS GLORY","BO3"],
+ ["20 Sep 2026","13:00","RRQ LEGEND","ONIC ESPORTS","BO3"],
+ ["20 Sep 2026","15:00","ALTER EGO","BIGETRON ALPHA","BO3"],
+ ["20 Sep 2026","17:00","GEEK FAM","DEWA UNITED","BO3"],
+ ["21 Sep 2026","15:00","REBELLION ESPORTS","TEAM LIQUID ID","BO3"]
+];
+
+function cards(list,offset=0){
+ return list.map((t,i)=>`<div class="card"><div class="number">#${offset+i+1}</div><div class="team-name">${t[0]}</div>${t[1].map((p,j)=>`<div class="player">${j+1}. ${p}</div>`).join("")}</div>`).join("");
+}
+document.getElementById("allTeams").innerHTML=cards(teams);
+document.getElementById("groupATeams").innerHTML=cards(teams.slice(0,5),0);
+document.getElementById("groupBTeams").innerHTML=cards(teams.slice(5,10),5);
+
+document.getElementById("scheduleRows").innerHTML=matches.map((m,i)=>
+ `<tr><td>${i+1}</td><td>${m[0]}</td><td>${m[1]}</td><td><b>${m[2]}</b> vs <b>${m[3]}</b></td><td>${m[4]}</td></tr>`).join("");
+
+const wins=[4,3,3,2,2,2,1,1,0,0], losses=[0,1,1,2,2,2,3,3,4,4], pts=[12,10,9,8,7,6,5,4,3,2];
+document.getElementById("standingRows").innerHTML=teams.map((t,i)=>
+ `<tr><td><b>${i+1}</b></td><td><b>${t[0]}</b></td><td>${t[1].join(" • ")}</td><td>${wins[i]}</td><td>${losses[i]}</td><td class="pts">${pts[i]}</td></tr>`).join("");
+
+document.getElementById("playoffTeams").innerHTML=cards(teams.slice(0,8));
+
+const semi=[
+ [["TEAM AURORA",...teams[0][1]],["EVOS GLORY",...teams[2][1]]],
+ [["RRQ LEGEND",...teams[1][1]],["ONIC ESPORTS",...teams[3][1]]]
+];
+document.getElementById("semiGrid").innerHTML=semi.map((m,i)=>`
+ <div class="round"><h3>SEMI FINAL ${i+1}</h3>
+  <div class="match"><b>${m[0][0]}</b>${m[0].slice(1).map(p=>`<div class="player">${p}</div>`).join("")}
+   <div class="vs">VS</div>
+   <b>${m[1][0]}</b>${m[1].slice(1).map(p=>`<div class="player">${p}</div>`).join("")}
+  </div>
+ </div>`).join("");
+
+document.getElementById("finalGrid").innerHTML=`
+ <div class="round"><h3>GRAND FINAL</h3><div class="match"><b>PEMENANG SEMI FINAL 1</b><div class="vs">VS</div><b>PEMENANG SEMI FINAL 2</b><div class="vs">BEST OF 5</div></div></div>
+ <div class="round champion"><h3>🏆 CHAMPION</h3><div class="match"><b>MENUNGGU HASIL FINAL</b><div class="vs">1 TEAM • 1 TROPHY</div><span style="color:var(--gold)">GRAND CHAMPION</span></div></div>
+ <div class="round"><h3>ROSTER FINAL</h3><div class="match"><b>FINALIS A</b><div class="vs">5 PEMAIN</div><b>FINALIS B</b><div class="vs">5 PEMAIN</div></div></div>`;
+
+document.querySelectorAll(".nav-btn").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");
+ document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+ document.getElementById(btn.dataset.page).classList.remove("hidden");
+ window.scrollTo({top:0,behavior:"smooth"});
+}));
+</script>
+</body>
+</html>'''
+
+(project / "index.html").write_text(html, encoding="utf-8")
+(project / "vercel.json").write_text('{\n  "cleanUrls": true,\n  "trailingSlash": false\n}\n', encoding="utf-8")
+(project / "README.txt").write_text(
+    "TOURNAMENT MOBILE LEGEND GROUP D\n\n"
+    "Menu: GROUP, GROUP A, GROUP B, JADWAL, PERINGKAT GROUP, PLAYOFF, SEMI FINAL, FINAL.\n"
+    "Upload project ini ke Vercel sebagai static site.\n",
+    encoding="utf-8"
+)
+
+zip_path=Path("/mnt/data/tournament-mobile-legend-group-d-A-B-vercel.zip")
+with zipfile.ZipFile(zip_path,"w",zipfile.ZIP_DEFLATED) as z:
+    for f in project.iterdir():
+        z.write(f,arcname=f.name)
+
+print(f"Created project: {project}")
+print(f"Created ZIP: {zip_path}")
+
+
+It seems like I can’t do more advanced data analysis right now. Please try again later. 
+
+Today 4:15 PM
+
+buat kan html vercel untuk TOURNAMENT MOBILE LEGEND GROUP D
+dengan tampilan menu
+
+GROUP ( jika di klik muncul nama tim dan nama pemain 10 TIM )
+GROUP A 5 TIM ( jika di klik muncul nama tim dan nama pemain 10 TIM )
+GROUP B 5 TIM ( jika di klik muncul nama tim dan nama pemain 10 TIM )
+JADWAL ( jika di klik muncul jadwal tim )
+PERINGKAT GROUP ( jika di klik muncul nama tim pemain setiap tim )
+PLAYOFF ( jika di klik muncul nama tim dan nama pemain )
+SEMI FINAL ( jika di klik muncul nama tim dan nama pemain )
+FINAL ( jika di klik muncul nama tim dan nama pemain )
+
+sama buat kan tampilan nya dengan gambar hero mobile legend ya
+
+Analysis errored
+from pathlib import Path
+import shutil, zipfile
+
+project = Path("/mnt/data/tournament-mobile-legend-group-d-vercel")
+project.mkdir(parents=True, exist_ok=True)
+
+hero = Path("/mnt/data/a_wide_polished_cinematic_esports_tournament_web.png")
+if hero.exists():
+    shutil.copy2(hero, project / "hero-bg.png")
+
+html = r'''<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tournament Mobile Legend — Group D</title>
+<meta name="description" content="Tournament Mobile Legend Group D">
+<style>
+:root{--gold:#ffd45a;--blue:#22aaff;--cyan:#65e9ff;--dark:#020713;--panel:rgba(3,13,30,.92);--line:rgba(34,170,255,.48);--muted:#9bb4c9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:#eef7ff;font-family:Arial,Segoe UI,sans-serif;background:var(--dark) url("hero-bg.png") center top/cover fixed no-repeat}
+body:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(1,5,15,.28),rgba(1,7,18,.88) 62%,#020713)}
+header{position:sticky;top:0;z-index:20;background:rgba(1,7,18,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(101,233,255,.25)}
+.nav{max-width:1450px;margin:auto;display:flex;align-items:center;padding:10px 15px;gap:15px}.brand{min-width:205px;color:var(--gold);font-weight:1000;letter-spacing:1px}.brand small{display:block;color:#fff;font-size:10px;letter-spacing:3px;margin-top:4px}
+.menu{display:flex;gap:5px;overflow-x:auto}.btn{border:1px solid transparent;background:transparent;color:#dcecff;padding:11px 12px;border-radius:10px;cursor:pointer;font-weight:900;font-size:12px;white-space:nowrap}.btn:hover,.btn.active{border-color:var(--cyan);background:rgba(34,170,255,.18);color:white;box-shadow:0 0 20px rgba(34,170,255,.14)}
+main{max-width:1450px;margin:auto;padding:24px 16px 60px}.hero{min-height:380px;border:1px solid rgba(101,233,255,.3);border-radius:24px;padding:32px;display:flex;align-items:flex-end;background:linear-gradient(90deg,rgba(1,7,18,.88),rgba(1,7,18,.18),rgba(1,7,18,.82));box-shadow:0 25px 75px #0008}.hero h1{margin:0;text-transform:uppercase;line-height:.88;letter-spacing:-3px;font-size:clamp(42px,7vw,92px);text-shadow:0 5px 28px #000}.hero h1 span{display:block;color:var(--gold)}.hero p{color:#d7e9f8;letter-spacing:2px;font-weight:800}
+.panel{margin-top:20px;background:var(--panel);border:1px solid rgba(34,170,255,.32);border-radius:20px;padding:22px;box-shadow:0 18px 60px #0008}.hidden{display:none}.heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px;gap:12px}.heading h2{margin:0;color:var(--gold);font-size:28px}.heading p{margin:5px 0 0;color:var(--muted)}.badge{border:1px solid #ffd45a66;color:var(--gold);border-radius:99px;padding:7px 11px;font-size:11px;font-weight:900;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.card{background:linear-gradient(145deg,#071d3af5,#020a19f5);border:1px solid var(--line);border-radius:14px;padding:15px;min-height:190px}.num{color:var(--gold);font-weight:900;font-size:12px}.team{font-weight:1000;font-size:16px;margin:6px 0 10px}.player{font-size:12px;color:#d4e7f7;padding:5px 0;border-top:1px solid #ffffff12}
+.tablebox{overflow:auto;border:1px solid #22aaff44;border-radius:12px}table{width:100%;min-width:760px;border-collapse:collapse;background:#020916bb}th,td{padding:12px;border-bottom:1px solid #ffffff10;text-align:left}th{color:var(--gold);font-size:11px;background:#22aaff18}td{font-size:13px}.pts{color:var(--cyan);font-weight:1000}
+.bracket{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.round{border:1px solid #22aaff4d;background:#020b1bb8;border-radius:15px;padding:15px}.round h3{margin:0 0 12px;color:var(--gold)}.match{border:1px solid #ffffff12;border-radius:10px;padding:12px;background:#ffffff05}.vs{font-size:10px;color:var(--muted);padding:6px 0}.champion{border-color:#ffd45a99;box-shadow:0 0 35px #ffd45a1c}
+footer{text-align:center;color:#718aa0;font-size:11px;padding:28px}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}.bracket{grid-template-columns:1fr}}
+@media(max-width:700px){.nav{align-items:flex-start}.brand{min-width:170px;font-size:15px}.btn{font-size:11px;padding:9px}.hero{min-height:260px;padding:20px}.hero h1{font-size:47px}.panel{padding:14px}.grid{grid-template-columns:1fr 1fr}.heading{align-items:flex-start;flex-direction:column}}
+@media(max-width:430px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+<div class="brand">MOBILE LEGENDS<small>TOURNAMENT • GROUP D</small></div>
+<div class="menu">
+<button class="btn active" data-page="group">👥 GROUP</button>
+<button class="btn" data-page="groupA">🔵 GROUP A</button>
+<button class="btn" data-page="groupB">🔴 GROUP B</button>
+<button class="btn" data-page="schedule">📅 JADWAL</button>
+<button class="btn" data-page="standing">🏆 PERINGKAT GROUP</button>
+<button class="btn" data-page="playoff">⚔️ PLAYOFF</button>
+<button class="btn" data-page="semi">🔥 SEMI FINAL</button>
+<button class="btn" data-page="final">👑 FINAL</button>
+</div></div></header>
+<main>
+<section class="hero"><div><h1>TOURNAMENT <span>MOBILE LEGEND</span>GROUP D</h1><p>10 TEAM • GROUP A & GROUP B • PLAYOFF • 1 CHAMPION</p></div></section>
+
+<section id="group" class="panel page"><div class="heading"><div><h2>GROUP D</h2><p>10 tim peserta dan nama pemain</p></div><span class="badge">10 TEAMS</span></div><div id="all" class="grid"></div></section>
+<section id="groupA" class="panel page hidden"><div class="heading"><div><h2>GROUP A</h2><p>5 tim dan roster pemain</p></div><span class="badge">5 TEAMS</span></div><div id="a" class="grid"></div></section>
+<section id="groupB" class="panel page hidden"><div class="heading"><div><h2>GROUP B</h2><p>5 tim dan roster pemain</p></div><span class="badge">5 TEAMS</span></div><div id="b" class="grid"></div></section>
+<section id="schedule" class="panel page hidden"><div class="heading"><div><h2>JADWAL</h2><p>Jadwal pertandingan Group D</p></div></div><div class="tablebox"><table><thead><tr><th>No</th><th>Tanggal</th><th>Jam</th><th>Pertandingan</th><th>Format</th></tr></thead><tbody id="sched"></tbody></table></div></section>
+<section id="standing" class="panel page hidden"><div class="heading"><div><h2>PERINGKAT GROUP</h2><p>Klasemen dan pemain setiap tim</p></div></div><div class="tablebox"><table><thead><tr><th>#</th><th>Tim</th><th>Pemain</th><th>W</th><th>L</th><th>PTS</th></tr></thead><tbody id="stand"></tbody></table></div></section>
+<section id="playoff" class="panel page hidden"><div class="heading"><div><h2>PLAYOFF</h2><p>8 tim lolos menuju fase eliminasi</p></div><span class="badge">TOP 8</span></div><div id="po" class="grid"></div></section>
+<section id="semi" class="panel page hidden"><div class="heading"><div><h2>SEMI FINAL</h2><p>2 pertandingan menuju Grand Final</p></div></div><div id="semis" class="bracket"></div></section>
+<section id="final" class="panel page hidden"><div class="heading"><div><h2>FINAL</h2><p>Grand Final — perebutan gelar juara</p></div></div><div id="fin" class="bracket"></div></section>
+</main><footer>TOURNAMENT MOBILE LEGEND GROUP D • Edit data tim, pemain, jadwal dan hasil di JavaScript.</footer>
+
+<script>
+const teams=[
+["TEAM AURORA",["AuroraXyze","AuroraRex","AuroraLynx","AuroraSky","AuroraNova"]],
+["RRQ LEGEND",["RRQZenn","RRQSkylark","RRQAlbert","RRQVyn","RRQPsycho"]],
+["EVOS GLORY",["EVOSBranz","EVOSSutsujin","EVOSDreams","EVOSClaw","EVOSLutpii"]],
+["ONIC ESPORTS",["ONICKiboy","ONICButsss","ONICCWW","ONICKairi","ONICSanz"]],
+["ALTER EGO",["AENino","AE Pai","AE Rasy","AE Celiboy","AE Udil"]],
+["GEEK FAM",["GEEKReyy","GEEKSanz","GEEKABOY","GEEKBaloyskie","GEEKCadera"]],
+["BIGETRON ALPHA",["BTRKyy","BTRMoreno","BTRSuper Kenn","BTRXorizo","BTRSaken"]],
+["REBELLION ESPORTS",["RBLHaizz","RBLFearless","RBLSwayLow","RBLKorizo","RBLVinzy"]],
+["DEWA UNITED",["DewaLanaya","DewaKyy","DewaWatt","DewaLeo","DewaRizky"]],
+["TEAM LIQUID ID",["TLDAran","TLDFaviann","TLDYhezxkiel","TLDAerron","TLDWidy"]]
+];
+const matches=[
+["18 Sep 2026","13:00","TEAM AURORA","RRQ LEGEND","BO3"],
+["18 Sep 2026","15:00","EVOS GLORY","ONIC ESPORTS","BO3"],
+["18 Sep 2026","17:00","ALTER EGO","GEEK FAM","BO3"],
+["19 Sep 2026","13:00","BIGETRON ALPHA","REBELLION ESPORTS","BO3"],
+["19 Sep 2026","15:00","DEWA UNITED","TEAM LIQUID ID","BO3"],
+["19 Sep 2026","17:00","TEAM AURORA","EVOS GLORY","BO3"],
+["20 Sep 2026","13:00","RRQ LEGEND","ONIC ESPORTS","BO3"],
+["20 Sep 2026","15:00","ALTER EGO","BIGETRON ALPHA","BO3"],
+["20 Sep 2026","17:00","GEEK FAM","DEWA UNITED","BO3"],
+["21 Sep 2026","15:00","REBELLION ESPORTS","TEAM LIQUID ID","BO3"]];
+function cards(list,start=0){return list.map((t,i)=>`<div class="card"><div class="num">#${start+i+1}</div><div class="team">${t[0]}</div>${t[1].map((p,j)=>`<div class="player">${j+1}. ${p}</div>`).join("")}</div>`).join("")}
+all.innerHTML=cards(teams);a.innerHTML=cards(teams.slice(0,5));b.innerHTML=cards(teams.slice(5),5);po.innerHTML=cards(teams.slice(0,8));
+sched.innerHTML=matches.map((m,i)=>`<tr><td>${i+1}</td><td>${m[0]}</td><td>${m[1]}</td><td><b>${m[2]}</b> vs <b>${m[3]}</b></td><td>${m[4]}</td></tr>`).join("");
+const W=[4,3,3,2,2,2,1,1,0,0],L=[0,1,1,2,2,2,3,3,4,4],P=[12,10,9,8,7,6,5,4,3,2];
+stand.innerHTML=teams.map((t,i)=>`<tr><td><b>${i+1}</b></td><td><b>${t[0]}</b></td><td>${t[1].join(" • ")}</td><td>${W[i]}</td><td>${L[i]}</td><td class="pts">${P[i]}</td></tr>`).join("");
+const semi=[[teams[0],teams[2]],[teams[1],teams[3]]];
+semis.innerHTML=semi.map((m,i)=>`<div class="round"><h3>SEMI FINAL ${i+1}</h3><div class="match"><b>${m[0][0]}</b>${m[0][1].map(p=>`<div class="player">${p}</div>`).join("")}<div class="vs">VS</div><b>${m[1][0]}</b>${m[1][1].map(p=>`<div class="player">${p}</div>`).join("")}</div></div>`).join("");
+fin.innerHTML=`<div class="round"><h3>GRAND FINAL</h3><div class="match"><b>PEMENANG SEMI FINAL 1</b><div class="vs">VS</div><b>PEMENANG SEMI FINAL 2</b><div class="vs">BEST OF 5</div></div></div><div class="round champion"><h3>🏆 CHAMPION</h3><div class="match"><b>MENUNGGU HASIL FINAL</b><div class="vs">1 TEAM • 1 TROPHY</div><span style="color:var(--gold)">GRAND CHAMPION</span></div></div><div class="round"><h3>ROSTER FINAL</h3><div class="match"><b>FINALIS A</b><div class="vs">5 PEMAIN</div><b>FINALIS B</b><div class="vs">5 PEMAIN</div></div></div>`;
+document.querySelectorAll(".btn").forEach(x=>x.onclick=()=>{document.querySelectorAll(".btn").forEach(b=>b.classList.remove("active"));x.classList.add("active");document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));document.getElementById(x.dataset.page).classList.remove("hidden");scrollTo({top:0,behavior:"smooth"})});
+</script>
+</body>
+</html>
+
