@@ -1,689 +1,1681 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TURNAMEN 10 TIM</title>
+<title>MLBB TOURNAMENT</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
 body{
- margin:0;font-family:Arial,sans-serif;
- background:linear-gradient(135deg,#005bea,#00c6fb,#ffd900);
- min-height:100vh;padding:15px;color:#111
+  background:
+    radial-gradient(circle at top left,#174ea6 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#ffd600 0%,transparent 35%),
+    linear-gradient(135deg,#06152f,#0b3d91,#071a3b);
+  color:white;
+  min-height:100vh;
 }
-.container{max-width:1200px;margin:auto}
-.header{text-align:center;color:white;padding:10px}
-.header h1{font-size:32px;margin:5px;text-shadow:2px 2px 5px #222}
-.menu{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:15px}
-.menu button{
- border:0;border-radius:10px;padding:14px 5px;background:white;
- color:#005bea;font-weight:bold;cursor:pointer
+
+header{
+  text-align:center;
+  padding:25px 15px;
+  background:rgba(0,0,0,.35);
+  border-bottom:3px solid #ffd600;
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(10px);
 }
-.menu button:hover{background:#ffd900;color:#111}
+
+.logo{
+  font-size:28px;
+  font-weight:900;
+  color:#ffd600;
+  text-shadow:0 0 15px rgba(255,214,0,.7);
+}
+
+.subtitle{
+  margin-top:6px;
+  color:#fff;
+  font-size:13px;
+}
+
+nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:12px;
+  background:#071a3b;
+  position:sticky;
+  top:91px;
+  z-index:90;
+}
+
+nav button{
+  white-space:nowrap;
+  border:1px solid #ffd600;
+  background:#0d4da4;
+  color:white;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+nav button:hover,
+nav button.active{
+  background:#ffd600;
+  color:#06152f;
+}
+
+.container{
+  width:min(1100px,94%);
+  margin:20px auto 50px;
+}
+
 .page{
- display:none;background:white;border-radius:18px;padding:20px;
- box-shadow:0 8px 25px #0004
+  display:none;
 }
-.page.active{display:block}
-h2{text-align:center;color:#005bea}
+
+.page.active{
+  display:block;
+}
+
 .card{
- border:2px solid #005bea;border-radius:14px;padding:15px;margin-bottom:18px
+  background:rgba(5,20,50,.9);
+  border:1px solid rgba(255,214,0,.5);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
 }
-.card-title{
- background:#005bea;color:white;padding:12px;border-radius:9px;
- text-align:center;font-weight:bold;margin-bottom:12px
+
+h2{
+  color:#ffd600;
+  margin-bottom:15px;
 }
+
+h3{
+  color:#ffd600;
+  margin-bottom:12px;
+}
+
 input,select{
- width:100%;padding:11px;border:2px solid #ddd;border-radius:8px;
- font-size:15px
+  width:100%;
+  padding:11px 12px;
+  border:none;
+  outline:none;
+  border-radius:9px;
+  background:#fff;
+  color:#111;
+  margin-top:6px;
+  font-size:14px;
 }
-.team-row{
- display:grid;grid-template-columns:45px 1fr 1fr;gap:8px;margin:8px 0
+
+label{
+  display:block;
+  margin-bottom:10px;
+  font-size:13px;
+  color:#ddd;
 }
-.number{background:#ffd900;padding:11px;border-radius:8px;text-align:center;font-weight:bold}
-.players{
- display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px
+
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:15px;
 }
-.table-box{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:700px}
-th{background:#005bea;color:white;padding:11px}
-td{border:1px solid #ddd;padding:8px;text-align:center}
-tr:nth-child(even){background:#f5f5f5}
-.score{
- width:55px;text-align:center;font-weight:bold
+
+.team-card{
+  background:linear-gradient(145deg,#0d4da4,#09265c);
+  padding:16px;
+  border-radius:15px;
+  border:1px solid rgba(255,214,0,.45);
 }
-.btn{
- border:0;border-radius:9px;padding:12px 18px;background:#ffd900;
- font-weight:bold;cursor:pointer;margin:5px 0
+
+.group-title{
+  padding:12px;
+  border-radius:10px;
+  text-align:center;
+  background:#ffd600;
+  color:#06152f;
+  font-size:20px;
+  font-weight:900;
+  margin:10px 0 15px;
 }
-.btn-blue{background:#005bea;color:white}
-.bracket{
- display:grid;grid-template-columns:repeat(3,1fr);gap:15px
+
+.player-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:7px;
 }
+
+.player-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.player-number{
+  width:28px;
+  height:28px;
+  flex:none;
+  border-radius:50%;
+  background:#ffd600;
+  color:#06152f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
 .match{
- background:#fff7b3;border:2px solid #005bea;border-radius:12px;
- padding:15px;text-align:center;font-weight:bold;margin:15px 0
+  background:#09265c;
+  border:1px solid rgba(255,214,0,.35);
+  padding:14px;
+  border-radius:13px;
+  margin-bottom:10px;
 }
-.savage-box,.mvp-box{
- padding:25px;border-radius:15px;text-align:center;
- background:#111;color:white
+
+.match-header{
+  color:#aaa;
+  font-size:12px;
+  margin-bottom:8px;
 }
-.savage-box h2,.mvp-box h2{color:#ffd900}
-.final{
- background:#005bea;color:white;text-align:center;padding:25px;border-radius:18px
+
+.match-row{
+  display:grid;
+  grid-template-columns:1fr 70px 1fr;
+  align-items:center;
+  gap:10px;
+  text-align:center;
 }
-.final-team{background:white;color:#005bea;padding:15px;margin:10px;border-radius:10px;font-size:20px;font-weight:bold}
-.status{text-align:center;font-weight:bold;color:#005bea;margin:10px}
-@media(max-width:700px){
- .menu{grid-template-columns:repeat(2,1fr)}
- .header h1{font-size:24px}
- .players{grid-template-columns:1fr}
- .team-row{grid-template-columns:35px 1fr}
- .team-row input:last-child{grid-column:2}
- .bracket{grid-template-columns:1fr}
+
+.team-name{
+  font-weight:bold;
+  color:white;
+  word-break:break-word;
+}
+
+.score-input{
+  margin:0;
+  text-align:center;
+  font-weight:bold;
+  font-size:18px;
+  padding:8px;
+}
+
+.vs{
+  color:#ffd600;
+  font-weight:bold;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  overflow:hidden;
+  border-radius:12px;
+}
+
+th{
+  background:#ffd600;
+  color:#06152f;
+  padding:11px 6px;
+  font-size:12px;
+}
+
+td{
+  padding:10px 6px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  text-align:center;
+  font-size:13px;
+}
+
+tr:nth-child(even){
+  background:rgba(255,255,255,.04);
+}
+
+.rank{
+  font-weight:bold;
+  color:#ffd600;
+}
+
+.playoff-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:15px;
+}
+
+.bracket-card{
+  background:linear-gradient(145deg,#0d4da4,#071a3b);
+  padding:18px;
+  border-radius:16px;
+  border:2px solid #ffd600;
+}
+
+.bracket-team{
+  background:#06152f;
+  padding:13px;
+  border-radius:10px;
+  margin:8px 0;
+  text-align:center;
+  font-weight:bold;
+}
+
+.champion{
+  text-align:center;
+  padding:25px;
+  border:2px solid #ffd600;
+  border-radius:18px;
+  background:linear-gradient(145deg,#174ea6,#ffd600);
+  color:#06152f;
+  margin-top:20px;
+}
+
+.champion-name{
+  font-size:28px;
+  font-weight:900;
+  margin-top:10px;
+}
+
+.btn{
+  border:none;
+  padding:11px 16px;
+  border-radius:10px;
+  background:#ffd600;
+  color:#06152f;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.btn-blue{
+  background:#0d4da4;
+  color:white;
+  border:1px solid #ffd600;
+}
+
+.info{
+  padding:12px;
+  border-left:4px solid #ffd600;
+  background:rgba(255,255,255,.05);
+  border-radius:7px;
+  margin-bottom:15px;
+  font-size:13px;
+  color:#ddd;
+}
+
+.badge{
+  display:inline-block;
+  background:#ffd600;
+  color:#06152f;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.empty{
+  text-align:center;
+  padding:25px;
+  color:#aaa;
+}
+
+@media(max-width:600px){
+  .logo{
+    font-size:22px;
+  }
+
+  header{
+    padding:18px 10px;
+  }
+
+  nav{
+    top:79px;
+  }
+
+  .container{
+    width:95%;
+  }
+
+  .card{
+    padding:13px;
+  }
+
+  .match-row{
+    grid-template-columns:1fr 55px 1fr;
+    gap:5px;
+  }
+
+  table{
+    font-size:11px;
+  }
+
+  th,td{
+    padding:8px 3px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<header>
+  <div class="logo">⚡ MLBB TOURNAMENT ⚡</div>
+  <div class="subtitle">10 TEAM • 50 PEMAIN • GROUP A & B</div>
+</header>
+
+<nav>
+  <button class="active" onclick="showPage('teams',this)">NAMA GROUP</button>
+  <button onclick="showPage('players',this)">50 PEMAIN</button>
+  <button onclick="showPage('schedule',this)">JADWAL</button>
+  <button onclick="showPage('ranking',this)">PERINGKAT</button>
+  <button onclick="showPage('playoff',this)">PLAYOFF</button>
+  <button onclick="showPage('savage',this)">SAVAGE</button>
+  <button onclick="showPage('final',this)">FINAL</button>
+  <button onclick="showPage('mvp',this)">MVP</button>
+</nav>
+
 <div class="container">
 
-<div class="header">
-<h1>🏆 TURNAMEN 10 TIM 🏆</h1>
-<p>GROUP • PLAYOFF • SAVAGE • FINAL • MVP</p>
-</div>
+<!-- ================= GROUP & TEAM ================= -->
 
-<div class="menu">
-<button onclick="showPage('teams')">👥 NAMA GROUP & TIM</button>
-<button onclick="showPage('players')">⚽ 50 PEMAIN</button>
-<button onclick="showPage('schedule')">📅 JADWAL</button>
-<button onclick="showPage('ranking')">📊 PERINGKAT</button>
-<button onclick="showPage('playoff')">🏆 PLAYOFF</button>
-<button onclick="showPage('savage')">🔥 SAVAGE</button>
-<button onclick="showPage('final')">🥇 FINAL</button>
-<button onclick="showPage('mvp')">👑 MVP</button>
-</div>
+<section id="teams" class="page active">
 
+  <div class="card">
+    <h2>🏆 NAMA GROUP & 10 TIM</h2>
 
-<!-- ================= TIM ================= -->
+    <label>
+      Nama Tournament
+      <input id="tournamentName"
+             value="MLBB TOURNAMENT"
+             onchange="saveTournamentName(this.value)">
+    </label>
 
-<div id="teams" class="page active">
-<h2>NAMA GROUP & 10 TIM</h2>
+    <div class="info">
+      Masukkan nama masing-masing tim. Setiap group terdiri dari 5 tim.
+      Perubahan nama akan otomatis digunakan pada jadwal, klasemen dan playoff.
+    </div>
+  </div>
 
-<div class="card">
-<div class="card-title">GROUP A — 5 TIM</div>
-<div id="groupA"></div>
-</div>
+  <div class="group-title">GROUP A — 5 TIM</div>
+  <div id="groupA" class="team-grid"></div>
 
-<div class="card">
-<div class="card-title">GROUP B — 5 TIM</div>
-<div id="groupB"></div>
-</div>
+  <div class="group-title">GROUP B — 5 TIM</div>
+  <div id="groupB" class="team-grid"></div>
 
-<button class="btn btn-blue" onclick="updateAll()">🔄 UPDATE SEMUA DATA</button>
-</div>
+</section>
 
+<!-- ================= PLAYERS ================= -->
 
-<!-- ================= PEMAIN ================= -->
+<section id="players" class="page">
 
-<div id="players" class="page">
-<h2>⚽ 10 TIM × 5 PEMAIN = 50 PEMAIN</h2>
-<div id="playerList"></div>
-<button class="btn btn-blue" onclick="updateAll()">🔄 UPDATE SEMUA DATA</button>
-</div>
+  <div class="card">
+    <h2>👥 50 PEMAIN</h2>
+    <div class="info">
+      Setiap tim memiliki 5 pemain. Nama pemain dapat diubah kapan saja.
+    </div>
+  </div>
 
+  <div id="playersContainer"></div>
 
-<!-- ================= JADWAL ================= -->
+</section>
 
-<div id="schedule" class="page">
-<h2>📅 JADWAL & SKOR PERTANDINGAN</h2>
+<!-- ================= SCHEDULE ================= -->
 
-<p class="status">
-Masukkan skor. Peringkat Group akan otomatis diperbarui.
-</p>
+<section id="schedule" class="page">
 
-<div class="table-box">
-<table>
-<thead>
-<tr>
-<th>No</th>
-<th>Group</th>
-<th>Pertandingan</th>
-<th>Jam</th>
-<th>Skor</th>
-</tr>
-</thead>
-<tbody id="scheduleBody"></tbody>
-</table>
-</div>
-</div>
+  <div class="card">
+    <h2>📅 JADWAL PERTANDINGAN</h2>
 
+    <div class="info">
+      Sistem otomatis membuat pertandingan round-robin.
+      Setiap tim bertemu semua tim lain dalam group yang sama.
+      Total: <b>20 pertandingan</b>.
+    </div>
+
+    <div id="scheduleContainer"></div>
+  </div>
+
+</section>
 
 <!-- ================= RANKING ================= -->
 
-<div id="ranking" class="page">
-<h2>📊 PERINGKAT GROUP</h2>
+<section id="ranking" class="page">
 
-<div class="card">
-<div class="card-title">GROUP A</div>
-<div class="table-box">
-<table>
-<thead>
-<tr>
-<th>Pos</th><th>Tim</th><th>Main</th>
-<th>Menang</th><th>Seri</th><th>Kalah</th><th>Poin</th>
-</tr>
-</thead>
-<tbody id="rankA"></tbody>
-</table>
-</div>
-</div>
+  <div class="card">
+    <h2>📊 PERINGKAT GROUP</h2>
 
-<div class="card">
-<div class="card-title">GROUP B</div>
-<div class="table-box">
-<table>
-<thead>
-<tr>
-<th>Pos</th><th>Tim</th><th>Main</th>
-<th>Menang</th><th>Seri</th><th>Kalah</th><th>Poin</th>
-</tr>
-</thead>
-<tbody id="rankB"></tbody>
-</table>
-</div>
-</div>
-</div>
+    <div class="info">
+      Menang = 3 poin • Seri = 1 poin • Kalah = 0 poin.
+      Klasemen berubah otomatis setelah skor dimasukkan.
+    </div>
 
+    <div class="group-title">GROUP A</div>
+    <div id="rankingA"></div>
+
+    <div class="group-title">GROUP B</div>
+    <div id="rankingB"></div>
+  </div>
+
+</section>
 
 <!-- ================= PLAYOFF ================= -->
 
-<div id="playoff" class="page">
-<h2>🏆 PLAYOFF</h2>
+<section id="playoff" class="page">
 
-<div class="bracket">
+  <div class="card">
+    <h2>🔥 PLAYOFF</h2>
 
-<div>
-<h3 style="text-align:center">SEMIFINAL</h3>
+    <div class="info">
+      Posisi playoff otomatis diambil dari klasemen:
+      <br>
+      Semifinal 1: Group A #1 vs Group B #2
+      <br>
+      Semifinal 2: Group B #1 vs Group A #2
+    </div>
 
-<div class="match">
-<span id="semi1A">GROUP A #1</span>
-<br>VS<br>
-<span id="semi1B">GROUP B #2</span>
-</div>
+    <div class="playoff-grid">
 
-<div class="match">
-<span id="semi2A">GROUP B #1</span>
-<br>VS<br>
-<span id="semi2B">GROUP A #2</span>
-</div>
-</div>
+      <div class="bracket-card">
+        <h3>SEMIFINAL 1</h3>
 
-<div>
-<h3 style="text-align:center">FINAL</h3>
+        <div class="bracket-team" id="sf1a">GROUP A #1</div>
 
-<div class="match">
-PEMENANG SEMIFINAL 1
-<br>VS<br>
-PEMENANG SEMIFINAL 2
-</div>
-</div>
+        <div style="text-align:center;color:#ffd600">VS</div>
 
-<div>
-<h3 style="text-align:center">JUARA</h3>
+        <div class="bracket-team" id="sf1b">GROUP B #2</div>
 
-<div class="match">
-🏆 JUARA TURNAMEN
-</div>
-</div>
+        <label>
+          Skor
+          <input type="number" min="0" id="sf1scoreA"
+                 placeholder="0"
+                 onchange="updatePlayoff()">
+        </label>
 
-</div>
-</div>
+        <label>
+          Skor
+          <input type="number" min="0" id="sf1scoreB"
+                 placeholder="0"
+                 onchange="updatePlayoff()">
+        </label>
 
+        <div class="info">
+          Pemenang: <b id="sf1winner">-</b>
+        </div>
+      </div>
 
-<!-- ================= SAVAGE ================= -->
+      <div class="bracket-card">
+        <h3>SEMIFINAL 2</h3>
 
-<div id="savage" class="page">
-<div class="savage-box">
-<h2>🔥 SAVAGE 🔥</h2>
-<p>Pemain dengan jumlah Savage terbanyak</p>
+        <div class="bracket-team" id="sf2a">GROUP B #1</div>
 
-<input id="savagePlayer" placeholder="Nama pemain Savage">
-<br><br>
-<input id="savageCount" type="number" min="0" placeholder="Jumlah Savage">
+        <div style="text-align:center;color:#ffd600">VS</div>
 
-<br><br>
-<button class="btn" onclick="saveSavage()">💾 SIMPAN SAVAGE</button>
+        <div class="bracket-team" id="sf2b">GROUP A #2</div>
 
-<h2 id="savageResult">—</h2>
-</div>
-</div>
+        <label>
+          Skor
+          <input type="number" min="0" id="sf2scoreA"
+                 placeholder="0"
+                 onchange="updatePlayoff()">
+        </label>
 
+        <label>
+          Skor
+          <input type="number" min="0" id="sf2scoreB"
+                 placeholder="0"
+                 onchange="updatePlayoff()">
+        </label>
+
+        <div class="info">
+          Pemenang: <b id="sf2winner">-</b>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
 
 <!-- ================= FINAL ================= -->
 
-<div id="final" class="page">
-<div class="final">
-<h2 style="color:#ffd900">🥇 GRAND FINAL 🥇</h2>
+<section id="final" class="page">
 
-<div class="final-team" id="finalTeam1">
-FINALIS 1
-</div>
+  <div class="card">
+    <h2>🏆 GRAND FINAL</h2>
 
-<h2 style="color:white">VS</h2>
+    <div class="bracket-card">
 
-<div class="final-team" id="finalTeam2">
-FINALIS 2
-</div>
+      <div class="bracket-team" id="finalA">
+        PEMENANG SEMIFINAL 1
+      </div>
 
-<h2 style="color:white">SKOR</h2>
+      <div style="text-align:center;color:#ffd600;font-weight:bold">
+        VS
+      </div>
 
-<h1>0 — 0</h1>
-</div>
-</div>
+      <div class="bracket-team" id="finalB">
+        PEMENANG SEMIFINAL 2
+      </div>
 
+      <label>
+        Skor Tim 1
+        <input type="number" min="0" id="finalScoreA"
+               placeholder="0"
+               onchange="updateFinal()">
+      </label>
+
+      <label>
+        Skor Tim 2
+        <input type="number" min="0" id="finalScoreB"
+               placeholder="0"
+               onchange="updateFinal()">
+      </label>
+
+      <div class="champion">
+        🏆 JUARA TOURNAMENT
+        <div class="champion-name" id="champion">
+          -
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ================= SAVAGE ================= -->
+
+<section id="savage" class="page">
+
+  <div class="card">
+    <h2>💥 SAVAGE</h2>
+
+    <div class="info">
+      Masukkan pemain yang mendapatkan Savage terbanyak.
+    </div>
+
+    <label>
+      Nama Pemain
+      <input id="savagePlayer" placeholder="Nama pemain">
+    </label>
+
+    <label>
+      Nama Tim
+      <input id="savageTeam" placeholder="Nama tim">
+    </label>
+
+    <label>
+      Jumlah Savage
+      <input type="number" min="0" id="savageCount" placeholder="0">
+    </label>
+
+    <button class="btn" onclick="saveSavage()">
+      SIMPAN SAVAGE
+    </button>
+
+    <div id="savageResult" style="margin-top:20px"></div>
+  </div>
+
+</section>
 
 <!-- ================= MVP ================= -->
 
-<div id="mvp" class="page">
-<div class="mvp-box">
-<h2>👑 MVP TURNAMEN 👑</h2>
+<section id="mvp" class="page">
 
-<input id="mvpName" placeholder="Nama pemain MVP">
-<br><br>
-<input id="mvpTeam" placeholder="Nama tim">
+  <div class="card">
+    <h2>⭐ MVP TOURNAMENT</h2>
 
-<br><br>
-<button class="btn" onclick="saveMVP()">👑 SIMPAN MVP</button>
+    <div class="info">
+      Masukkan pemain yang dipilih sebagai MVP Tournament.
+    </div>
 
-<h2 id="mvpResult">—</h2>
+    <label>
+      Nama Pemain
+      <input id="mvpPlayer" placeholder="Nama pemain">
+    </label>
+
+    <label>
+      Nama Tim
+      <input id="mvpTeam" placeholder="Nama tim">
+    </label>
+
+    <button class="btn" onclick="saveMVP()">
+      SIMPAN MVP
+    </button>
+
+    <div id="mvpResult" style="margin-top:20px"></div>
+  </div>
+
+</section>
+
 </div>
-</div>
-
-</div>
-
 
 <script>
 
-/* =========================================
-   DATA 10 TIM
-========================================= */
+/* =========================================================
+   DATA
+========================================================= */
 
-const teams = [];
+let teams = [];
 
 for(let i=0;i<10;i++){
 
-    teams.push({
-        name: "TIM " + (i+1),
-        group: i < 5 ? "A" : "B",
-        players: ["","","","",""],
-        played:0,
-        win:0,
-        draw:0,
-        loss:0,
-        points:0
-    });
+  teams.push({
+    id:i,
+    name:"TIM " + (i+1),
+    group:i < 5 ? "A" : "B",
+
+    players:[
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+
+    played:0,
+    win:0,
+    draw:0,
+    loss:0,
+    points:0
+  });
 
 }
 
+let matches = [];
 
-/* =========================================
-   TAMPILKAN TIM
-========================================= */
+let playoffData = {
+  sf1scoreA:"",
+  sf1scoreB:"",
+  sf2scoreA:"",
+  sf2scoreB:"",
+  finalScoreA:"",
+  finalScoreB:""
+};
+
+let savageData = {};
+let mvpData = {};
+
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
+
+function saveData(){
+
+  localStorage.setItem(
+    "mlbbTournamentData",
+    JSON.stringify({
+      teams,
+      matches,
+      playoffData,
+      savageData,
+      mvpData,
+      tournamentName:
+        document.getElementById("tournamentName")?.value ||
+        "MLBB TOURNAMENT"
+    })
+  );
+
+}
+
+function loadData(){
+
+  const saved =
+    localStorage.getItem("mlbbTournamentData");
+
+  if(!saved) return;
+
+  try{
+
+    const data = JSON.parse(saved);
+
+    if(data.teams) teams = data.teams;
+
+    if(data.matches) matches = data.matches;
+
+    if(data.playoffData)
+      playoffData = data.playoffData;
+
+    if(data.savageData)
+      savageData = data.savageData;
+
+    if(data.mvpData)
+      mvpData = data.mvpData;
+
+    if(data.tournamentName){
+      document.getElementById("tournamentName").value =
+        data.tournamentName;
+    }
+
+  }catch(e){
+
+    console.log("Data lama tidak dapat dibaca.");
+
+  }
+
+}
+
+function saveTournamentName(value){
+
+  document.title = value || "MLBB TOURNAMENT";
+
+  saveData();
+
+}
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function showPage(page,button){
+
+  document.querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
+
+  document.getElementById(page)
+    .classList.add("active");
+
+  document.querySelectorAll("nav button")
+    .forEach(b=>b.classList.remove("active"));
+
+  if(button){
+    button.classList.add("active");
+  }
+
+}
+
+/* =========================================================
+   TEAM RENDER
+========================================================= */
 
 function renderTeams(){
 
-    const A=document.getElementById("groupA");
-    const B=document.getElementById("groupB");
+  const groupA =
+    document.getElementById("groupA");
 
-    A.innerHTML="";
-    B.innerHTML="";
+  const groupB =
+    document.getElementById("groupB");
 
-    teams.forEach((team,index)=>{
+  groupA.innerHTML="";
+  groupB.innerHTML="";
 
-        const html=`
-        <div class="team-row">
-            <div class="number">${index%5+1}</div>
+  teams.forEach((team,index)=>{
 
-            <input
-                value="${team.name}"
-                placeholder="Nama Tim"
-                oninput="teams[${index}].name=this.value; updateAll();"
-            >
+    const div =
+      document.createElement("div");
 
-            <input
-                placeholder="Nama Kapten"
-            >
-        </div>`;
+    div.className="team-card";
 
-        if(team.group==="A") A.innerHTML+=html;
-        else B.innerHTML+=html;
+    div.innerHTML=`
+
+      <h3>
+        ${team.group === "A"
+          ? "🔵"
+          : "🟡"}
+        ${team.group === "A"
+          ? "GROUP A"
+          : "GROUP B"}
+      </h3>
+
+      <label>
+        Nama Tim
+        <input
+          value="${escapeHTML(team.name)}"
+          data-team-name="${index}"
+          placeholder="Nama Tim">
+      </label>
+
+      <div style="margin-top:8px">
+        <span class="badge">
+          5 PEMAIN
+        </span>
+      </div>
+
+    `;
+
+    if(team.group==="A"){
+      groupA.appendChild(div);
+    }else{
+      groupB.appendChild(div);
+    }
+
+  });
+
+  document
+    .querySelectorAll("[data-team-name]")
+    .forEach(input=>{
+
+      input.addEventListener("input",function(){
+
+        const index =
+          Number(this.dataset.teamName);
+
+        teams[index].name =
+          this.value || "TIM " + (index+1);
+
+        updateTeamNamesOnly();
+
+        saveData();
+
+      });
 
     });
+
 }
 
-
-/* =========================================
-   PEMAIN 50 ORANG
-========================================= */
+/* =========================================================
+   PLAYER RENDER
+========================================================= */
 
 function renderPlayers(){
 
-    const box=document.getElementById("playerList");
-    box.innerHTML="";
+  const container =
+    document.getElementById("playersContainer");
 
-    teams.forEach((team,t)=>{
+  container.innerHTML="";
 
-        let html=`
-        <div class="card">
-        <div class="card-title">
-        GROUP ${team.group} — ${team.name}
+  teams.forEach((team,index)=>{
+
+    const card =
+      document.createElement("div");
+
+    card.className="card";
+
+    let html=`
+
+      <h3>
+        ${team.group==="A" ? "🔵" : "🟡"}
+        <span id="playerTeamTitle${index}">
+          ${escapeHTML(team.name)}
+        </span>
+      </h3>
+
+      <div class="player-list">
+    `;
+
+    for(let p=0;p<5;p++){
+
+      html+=`
+
+        <div class="player-item">
+
+          <div class="player-number">
+            ${p+1}
+          </div>
+
+          <input
+            data-player-team="${index}"
+            data-player-index="${p}"
+            value="${escapeHTML(team.players[p])}"
+            placeholder="Nama Player ${p+1}">
+
         </div>
 
-        <div class="players">`;
+      `;
 
-        for(let p=0;p<5;p++){
+    }
 
-            html+=`
-            <input
-                value="${team.players[p]}"
-                placeholder="Pemain ${p+1}"
-                oninput="teams[${t}].players[${p}]=this.value"
-            >`;
+    html+=`</div>`;
 
-        }
+    card.innerHTML=html;
 
-        html+=`</div></div>`;
+    container.appendChild(card);
 
-        box.innerHTML+=html;
+  });
+
+  document
+    .querySelectorAll("[data-player-team]")
+    .forEach(input=>{
+
+      input.addEventListener("input",function(){
+
+        const teamIndex =
+          Number(this.dataset.playerTeam);
+
+        const playerIndex =
+          Number(this.dataset.playerIndex);
+
+        teams[teamIndex]
+          .players[playerIndex] =
+          this.value;
+
+        saveData();
+
+      });
 
     });
+
 }
 
-
-/* =========================================
-   JADWAL
-========================================= */
-
-const matches=[];
+/* =========================================================
+   SCHEDULE
+========================================================= */
 
 function createSchedule(){
 
-    matches.length=0;
+  /*
+    Jangan membuat ulang jika sudah ada data.
+  */
 
-    ["A","B"].forEach(group=>{
+  if(matches.length===20){
+    return;
+  }
 
-        const ids=teams
-            .map((t,i)=>t.group===group?i:-1)
-            .filter(i=>i>=0);
+  matches=[];
 
-        for(let i=0;i<ids.length;i++){
+  ["A","B"].forEach(group=>{
 
-            for(let j=i+1;j<ids.length;j++){
+    const groupTeams =
+      teams.filter(t=>t.group===group);
 
-                matches.push({
-                    a:ids[i],
-                    b:ids[j],
-                    scoreA:"",
-                    scoreB:""
-                });
+    for(let i=0;i<groupTeams.length;i++){
 
-            }
+      for(let j=i+1;j<groupTeams.length;j++){
 
-        }
+        matches.push({
 
-    });
+          group,
 
-    renderSchedule();
+          a:groupTeams[i].id,
+
+          b:groupTeams[j].id,
+
+          scoreA:"",
+
+          scoreB:""
+
+        });
+
+      }
+
+    }
+
+  });
+
+  saveData();
+
 }
 
+/* =========================================================
+   RENDER SCHEDULE
+========================================================= */
 
 function renderSchedule(){
 
-    const body=document.getElementById("scheduleBody");
-    body.innerHTML="";
+  const container =
+    document.getElementById("scheduleContainer");
 
-    matches.forEach((m,i)=>{
+  container.innerHTML="";
 
-        const a=teams[m.a];
-        const b=teams[m.b];
+  ["A","B"].forEach(group=>{
 
-        body.innerHTML+=`
-        <tr>
-            <td>${i+1}</td>
-            <td>GROUP ${a.group}</td>
-            <td>
-                <b>${a.name}</b>
-                vs
-                <b>${b.name}</b>
-            </td>
-            <td>${13+i}:00</td>
+    const title =
+      document.createElement("div");
 
-            <td>
-                <input class="score"
-                    type="number"
-                    min="0"
-                    value="${m.scoreA}"
-                    onchange="setScore(${i},'a',this.value)"
-                >
+    title.className="group-title";
 
-                -
+    title.textContent =
+      "GROUP " + group;
 
-                <input class="score"
-                    type="number"
-                    min="0"
-                    value="${m.scoreB}"
-                    onchange="setScore(${i},'b',this.value)"
-                >
-            </td>
-        </tr>`;
+    container.appendChild(title);
+
+    matches
+      .filter(m=>m.group===group)
+      .forEach((match,index)=>{
+
+        const teamA =
+          teams.find(t=>t.id===match.a);
+
+        const teamB =
+          teams.find(t=>t.id===match.b);
+
+        const realIndex =
+          matches.indexOf(match);
+
+        const div =
+          document.createElement("div");
+
+        div.className="match";
+
+        div.innerHTML=`
+
+          <div class="match-header">
+            MATCH ${realIndex+1}
+          </div>
+
+          <div class="match-row">
+
+            <div class="team-name">
+              ${escapeHTML(teamA.name)}
+            </div>
+
+            <input
+              class="score-input"
+              type="number"
+              min="0"
+              value="${match.scoreA}"
+              placeholder="0"
+              data-match="${realIndex}"
+              data-side="A">
+
+            <div class="team-name">
+              ${escapeHTML(teamB.name)}
+            </div>
+
+          </div>
+
+          <div style="
+            text-align:center;
+            margin-top:8px;
+            color:#ffd600;
+            font-size:12px;">
+            VS
+          </div>
+
+          <input
+            class="score-input"
+            style="width:100%;margin-top:7px"
+            type="number"
+            min="0"
+            value="${match.scoreB}"
+            placeholder="Skor ${escapeHTML(teamB.name)}"
+            data-match="${realIndex}"
+            data-side="B">
+
+        `;
+
+        container.appendChild(div);
+
+      });
+
+  });
+
+  document
+    .querySelectorAll("[data-match]")
+    .forEach(input=>{
+
+      input.addEventListener("input",function(){
+
+        const index =
+          Number(this.dataset.match);
+
+        const side =
+          this.dataset.side;
+
+        matches[index][
+          side==="A" ? "scoreA" : "scoreB"
+        ] = this.value;
+
+        calculateRanking();
+
+        updatePlayoff();
+
+        updateFinal();
+
+        saveData();
+
+      });
 
     });
+
 }
 
-
-/* =========================================
-   SKOR OTOMATIS
-========================================= */
-
-function setScore(index,side,value){
-
-    let number=value==="" ? "" : Math.max(0,parseInt(value)||0);
-
-    matches[index][side==="a"?"scoreA":"scoreB"]=number;
-
-    calculateRanking();
-}
-
-
-/* =========================================
-   PERINGKAT
-========================================= */
+/* =========================================================
+   RANKING
+========================================================= */
 
 function calculateRanking(){
 
-    teams.forEach(t=>{
-        t.played=0;
-        t.win=0;
-        t.draw=0;
-        t.loss=0;
-        t.points=0;
-    });
+  teams.forEach(team=>{
 
-    matches.forEach(m=>{
+    team.played=0;
+    team.win=0;
+    team.draw=0;
+    team.loss=0;
+    team.points=0;
 
-        if(m.scoreA==="" || m.scoreB==="") return;
+  });
 
-        const a=teams[m.a];
-        const b=teams[m.b];
+  matches.forEach(match=>{
 
-        const sa=Number(m.scoreA);
-        const sb=Number(m.scoreB);
+    if(
+      match.scoreA === "" ||
+      match.scoreB === ""
+    ) return;
 
-        a.played++;
-        b.played++;
+    const a =
+      Number(match.scoreA);
 
-        if(sa>sb){
-            a.win++;
-            a.points+=3;
-            b.loss++;
-        }
-        else if(sb>sa){
-            b.win++;
-            b.points+=3;
-            a.loss++;
-        }
-        else{
-            a.draw++;
-            b.draw++;
-            a.points++;
-            b.points++;
-        }
+    const b =
+      Number(match.scoreB);
 
-    });
+    if(isNaN(a)||isNaN(b)) return;
 
-    renderRanking("A","rankA");
-    renderRanking("B","rankB");
-    updatePlayoff();
+    const teamA =
+      teams.find(t=>t.id===match.a);
+
+    const teamB =
+      teams.find(t=>t.id===match.b);
+
+    if(!teamA || !teamB) return;
+
+    teamA.played++;
+    teamB.played++;
+
+    if(a>b){
+
+      teamA.win++;
+      teamB.loss++;
+
+      teamA.points+=3;
+
+    }else if(b>a){
+
+      teamB.win++;
+      teamA.loss++;
+
+      teamB.points+=3;
+
+    }else{
+
+      teamA.draw++;
+      teamB.draw++;
+
+      teamA.points++;
+      teamB.points++;
+
+    }
+
+  });
+
+  renderRanking();
+
+  saveData();
 
 }
 
+/* =========================================================
+   RANKING TABLE
+========================================================= */
 
-function renderRanking(group,id){
+function getRankedTeams(group){
 
-    const list=teams
-        .filter(t=>t.group===group)
-        .sort((a,b)=>b.points-a.points);
+  return teams
+    .filter(t=>t.group===group)
+    .sort((a,b)=>{
 
-    const body=document.getElementById(id);
-    body.innerHTML="";
+      if(b.points!==a.points)
+        return b.points-a.points;
 
-    list.forEach((t,i)=>{
+      if(b.win!==a.win)
+        return b.win-a.win;
 
-        body.innerHTML+=`
+      return a.name.localeCompare(b.name);
+
+    });
+
+}
+
+function renderRanking(){
+
+  renderGroupRanking(
+    "A",
+    document.getElementById("rankingA")
+  );
+
+  renderGroupRanking(
+    "B",
+    document.getElementById("rankingB")
+  );
+
+}
+
+function renderGroupRanking(group,container){
+
+  const ranked =
+    getRankedTeams(group);
+
+  let html=`
+
+    <div style="overflow-x:auto">
+
+    <table>
+
+      <thead>
         <tr>
-            <td><b>${i+1}</b></td>
-            <td>${t.name}</td>
-            <td>${t.played}</td>
-            <td>${t.win}</td>
-            <td>${t.draw}</td>
-            <td>${t.loss}</td>
-            <td><b>${t.points}</b></td>
-        </tr>`;
+          <th>#</th>
+          <th>TEAM</th>
+          <th>MP</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>PTS</th>
+        </tr>
+      </thead>
+
+      <tbody>
+  `;
+
+  ranked.forEach((team,index)=>{
+
+    html+=`
+
+      <tr>
+
+        <td class="rank">
+          ${index+1}
+        </td>
+
+        <td style="text-align:left;font-weight:bold">
+          ${escapeHTML(team.name)}
+        </td>
+
+        <td>${team.played}</td>
+
+        <td>${team.win}</td>
+
+        <td>${team.draw}</td>
+
+        <td>${team.loss}</td>
+
+        <td style="
+          color:#ffd600;
+          font-weight:900">
+          ${team.points}
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+  html+=`
+
+      </tbody>
+    </table>
+    </div>
+
+  `;
+
+  container.innerHTML=html;
+
+}
+
+/* =========================================================
+   UPDATE TEAM NAMES WITHOUT DESTROYING INPUT
+========================================================= */
+
+function updateTeamNamesOnly(){
+
+  renderSchedule();
+
+  renderRanking();
+
+  updatePlayoff();
+
+  updateFinal();
+
+  document
+    .querySelectorAll("[id^='playerTeamTitle']")
+    .forEach(title=>{
+
+      const index =
+        Number(
+          title.id.replace("playerTeamTitle","")
+        );
+
+      if(teams[index]){
+        title.textContent =
+          teams[index].name;
+      }
 
     });
 
 }
 
-
-/* =========================================
-   PLAYOFF OTOMATIS
-========================================= */
-
-function getRank(group,pos){
-
-    return teams
-        .filter(t=>t.group===group)
-        .sort((a,b)=>b.points-a.points)[pos-1]?.name || "—";
-
-}
-
+/* =========================================================
+   PLAYOFF
+========================================================= */
 
 function updatePlayoff(){
 
-    document.getElementById("semi1A").textContent=getRank("A",1);
-    document.getElementById("semi1B").textContent=getRank("B",2);
+  const A =
+    getRankedTeams("A");
 
-    document.getElementById("semi2A").textContent=getRank("B",1);
-    document.getElementById("semi2B").textContent=getRank("A",2);
+  const B =
+    getRankedTeams("B");
+
+  const sf1a =
+    A[0]?.name || "GROUP A #1";
+
+  const sf1b =
+    B[1]?.name || "GROUP B #2";
+
+  const sf2a =
+    B[0]?.name || "GROUP B #1";
+
+  const sf2b =
+    A[1]?.name || "GROUP A #2";
+
+  document.getElementById("sf1a")
+    .textContent=sf1a;
+
+  document.getElementById("sf1b")
+    .textContent=sf1b;
+
+  document.getElementById("sf2a")
+    .textContent=sf2a;
+
+  document.getElementById("sf2b")
+    .textContent=sf2b;
+
+  const s1a =
+    document.getElementById("sf1scoreA").value;
+
+  const s1b =
+    document.getElementById("sf1scoreB").value;
+
+  const s2a =
+    document.getElementById("sf2scoreA").value;
+
+  const s2b =
+    document.getElementById("sf2scoreB").value;
+
+  let winner1="-";
+  let winner2="-";
+
+  if(s1a!=="" && s1b!==""){
+
+    if(Number(s1a)>Number(s1b))
+      winner1=sf1a;
+
+    else if(Number(s1b)>Number(s1a))
+      winner1=sf1b;
+
+    else
+      winner1="SERI";
+
+  }
+
+  if(s2a!=="" && s2b!==""){
+
+    if(Number(s2a)>Number(s2b))
+      winner2=sf2a;
+
+    else if(Number(s2b)>Number(s2a))
+      winner2=sf2b;
+
+    else
+      winner2="SERI";
+
+  }
+
+  document.getElementById("sf1winner")
+    .textContent=winner1;
+
+  document.getElementById("sf2winner")
+    .textContent=winner2;
+
+  playoffData.sf1scoreA=s1a;
+  playoffData.sf1scoreB=s1b;
+  playoffData.sf2scoreA=s2a;
+  playoffData.sf2scoreB=s2b;
+
+  document.getElementById("finalA")
+    .textContent=
+      winner1==="-" || winner1==="SERI"
+      ? "PEMENANG SEMIFINAL 1"
+      : winner1;
+
+  document.getElementById("finalB")
+    .textContent=
+      winner2==="-" || winner2==="SERI"
+      ? "PEMENANG SEMIFINAL 2"
+      : winner2;
+
+  saveData();
 
 }
 
+/* =========================================================
+   FINAL
+========================================================= */
 
-/* =========================================
-   MENU
-========================================= */
+function updateFinal(){
 
-function showPage(id){
+  updatePlayoff();
 
-    document.querySelectorAll(".page").forEach(p=>{
-        p.classList.remove("active");
-    });
+  const teamA =
+    document.getElementById("finalA")
+      .textContent;
 
-    document.getElementById(id).classList.add("active");
+  const teamB =
+    document.getElementById("finalB")
+      .textContent;
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+  const scoreA =
+    document.getElementById("finalScoreA")
+      .value;
+
+  const scoreB =
+    document.getElementById("finalScoreB")
+      .value;
+
+  let champion="-";
+
+  if(
+    scoreA!=="" &&
+    scoreB!=="" &&
+    teamA !== "PEMENANG SEMIFINAL 1" &&
+    teamB !== "PEMENANG SEMIFINAL 2"
+  ){
+
+    if(Number(scoreA)>Number(scoreB)){
+      champion=teamA;
+    }
+
+    else if(Number(scoreB)>Number(scoreA)){
+      champion=teamB;
+    }
+
+    else{
+      champion="SERI";
+    }
+
+  }
+
+  document.getElementById("champion")
+    .textContent=champion;
+
+  playoffData.finalScoreA=scoreA;
+  playoffData.finalScoreB=scoreB;
+
+  saveData();
 
 }
 
-
-/* =========================================
-   UPDATE
-========================================= */
-
-function updateAll(){
-
-    renderTeams();
-    renderPlayers();
-    renderSchedule();
-    calculateRanking();
-
-}
-
-
-/* =========================================
+/* =========================================================
    SAVAGE
-========================================= */
+========================================================= */
 
 function saveSavage(){
 
-    const name=document.getElementById("savagePlayer").value.trim();
-    const count=document.getElementById("savageCount").value;
+  savageData={
+    player:
+      document.getElementById("savagePlayer").value,
 
-    if(!name){
-        alert("Masukkan nama pemain.");
-        return;
-    }
+    team:
+      document.getElementById("savageTeam").value,
 
-    document.getElementById("savageResult").textContent=
-        "🔥 "+name+" — "+(count||0)+" SAVAGE";
+    count:
+      document.getElementById("savageCount").value
+  };
+
+  localStorage.setItem(
+    "mlbbSavage",
+    JSON.stringify(savageData)
+  );
+
+  renderSavage();
 
 }
 
+function renderSavage(){
 
-/* =========================================
+  if(!savageData.player) return;
+
+  document.getElementById("savageResult")
+    .innerHTML=`
+
+      <div class="champion">
+
+        💥 SAVAGE TERBANYAK
+
+        <div class="champion-name"
+             style="font-size:24px">
+
+          ${escapeHTML(savageData.player)}
+
+        </div>
+
+        <div style="margin-top:8px">
+          ${escapeHTML(savageData.team)}
+        </div>
+
+        <div style="margin-top:8px">
+          ${savageData.count} SAVAGE
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+/* =========================================================
    MVP
-========================================= */
+========================================================= */
 
 function saveMVP(){
 
-    const name=document.getElementById("mvpName").value.trim();
-    const team=document.getElementById("mvpTeam").value.trim();
+  mvpData={
+    player:
+      document.getElementById("mvpPlayer").value,
 
-    if(!name){
-        alert("Masukkan nama MVP.");
-        return;
-    }
+    team:
+      document.getElementById("mvpTeam").value
+  };
 
-    document.getElementById("mvpResult").textContent=
-        "👑 "+name+" — "+(team||"Tanpa Tim");
+  localStorage.setItem(
+    "mlbbMVP",
+    JSON.stringify(mvpData)
+  );
+
+  renderMVP();
 
 }
 
+function renderMVP(){
 
-/* =========================================
-   MULAI
-========================================= */
+  if(!mvpData.player) return;
+
+  document.getElementById("mvpResult")
+    .innerHTML=`
+
+      <div class="champion">
+
+        ⭐ MVP TOURNAMENT
+
+        <div class="champion-name"
+             style="font-size:24px">
+
+          ${escapeHTML(mvpData.player)}
+
+        </div>
+
+        <div style="margin-top:8px">
+          ${escapeHTML(mvpData.team)}
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+/* =========================================================
+   SECURITY HELPER
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+/* =========================================================
+   RESTORE PLAYOFF VALUES
+========================================================= */
+
+function restoreValues(){
+
+  document.getElementById("sf1scoreA").value =
+    playoffData.sf1scoreA || "";
+
+  document.getElementById("sf1scoreB").value =
+    playoffData.sf1scoreB || "";
+
+  document.getElementById("sf2scoreA").value =
+    playoffData.sf2scoreA || "";
+
+  document.getElementById("sf2scoreB").value =
+    playoffData.sf2scoreB || "";
+
+  document.getElementById("finalScoreA").value =
+    playoffData.finalScoreA || "";
+
+  document.getElementById("finalScoreB").value =
+    playoffData.finalScoreB || "";
+
+}
+
+/* =========================================================
+   START
+========================================================= */
+
+loadData();
+
+document.title =
+  document.getElementById("tournamentName")?.value ||
+  "MLBB TOURNAMENT";
+
+createSchedule();
 
 renderTeams();
 renderPlayers();
-createSchedule();
+renderSchedule();
 calculateRanking();
+
+restoreValues();
+
+updatePlayoff();
+updateFinal();
+
+renderSavage();
+renderMVP();
 
 </script>
 
