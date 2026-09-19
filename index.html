@@ -459,5 +459,622 @@ td:nth-child(2){
     <div class="team-card">
       <h3>TEAM 06</h3>
       <input placeholder="Nama Tim 6">
-    </di
+    </div>
+
+    <div class="team-card">
+      <h3>TEAM 07</h3>
+      <input placeholder="Nama Tim 7">
+    </div>
+
+    <div class="team-card">
+      <h3>TEAM 08</h3>
+      <input placeholder="Nama Tim 8">
+    </div>
+
+    <div class="team-card">
+      <h3>TEAM 09</h3>
+      <input placeholder="Nama Tim 9">
+    </div>
+
+    <div class="team-card">
+      <h3>TEAM 10</h3>
+      <input placeholder="Nama Tim 10">
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     50 PEMAIN
+===================================================== -->
+
+<section id="players" class="page">
+
+  <div class="card">
+
+    <h2>👥 50 PEMAIN</h2>
+
+    <div class="info">
+      1 tim terdiri dari 5 pemain.
+      Silakan isi nama pemain secara manual.
+    </div>
+
+  </div>
+
+
+<script>
+
+for(let i=1;i<=10;i++){
+
+  document.write(`
+
+    <div class="card">
+
+      <h3>
+        TEAM ${String(i).padStart(2,'0')}
+      </h3>
+
+      <div class="player-row">
+        <div class="player-number">1</div>
+        <input placeholder="Nama Player 1">
+      </div>
+
+      <div class="player-row">
+        <div class="player-number">2</div>
+        <input placeholder="Nama Player 2">
+      </div>
+
+      <div class="player-row">
+        <div class="player-number">3</div>
+        <input placeholder="Nama Player 3">
+      </div>
+
+      <div class="player-row">
+        <div class="player-number">4</div>
+        <input placeholder="Nama Player 4">
+      </div>
+
+      <div class="player-row">
+        <div class="player-number">5</div>
+        <input placeholder="Nama Player 5">
+      </div>
+
+    </div>
+
+  `);
+
+}
+
+</script>
+
+</section>
+
+
+<!-- =====================================================
+     JADWAL
+===================================================== -->
+
+<section id="schedule" class="page">
+
+  <div class="card">
+
+    <h2>📅 JADWAL PERTANDINGAN</h2>
+
+    <div class="info">
+      Jadwal dan skor diisi secara manual.
+    </div>
+
+  </div>
+
+
+  <div class="group-title">
+    🔵 GROUP A
+  </div>
+
+
+<script>
+
+const jadwalA=[
+  ["TEAM 01","TEAM 02"],
+  ["TEAM 03","TEAM 04"],
+  ["TEAM 05","TEAM 01"],
+  ["TEAM 02","TEAM 03"],
+  ["TEAM 04","TEAM 05"],
+  ["TEAM 01","TEAM 03"],
+  ["TEAM 02","TEAM 04"],
+  ["TEAM 05","TEAM 02"],
+  ["TEAM 03","TEAM 05"],
+  ["TEAM 04","TEAM 01"]
+];
+
+jadwalA.forEach((match,i)=>{
+
+  document.write(`
+
+    <div class="match">
+
+      <div class="match-title">
+        MATCH A-${i+1}
+      </div>
+
+      <div class="match-row">
+
+        <div class="team-name">
+          ${match[0]}
+        </div>
+
+        <input
+          class="score"
+          type="number"
+          min="0"
+          placeholder="0">
+
+        <div class="team-name">
+          ${match[1]}
+        </div>
+
+      </div>
+
+    </div>
+
+  `);
+
+});
+
+</script>
+
+
+<div class="group-title">
+  🟡 GROUP B
+</div>
+
+
+<script>
+
+const jadwalB=[
+  ["TEAM 06","TEAM 07"],
+  ["TEAM 08","TEAM 09"],
+  ["TEAM 10","TEAM 06"],
+  ["TEAM 07","TEAM 08"],
+  ["TEAM 09","TEAM 10"],
+  ["TEAM 06","TEAM 08"],
+  ["TEAM 07","TEAM 09"],
+  ["TEAM 10","TEAM 07"],
+  ["TEAM 08","TEAM 10"],
+  ["TEAM 09","TEAM 06"]
+];
+
+jadwalB.forEach((match,i)=>{
+
+  document.write(`
+
+    <div class="match">
+
+      <div class="match-title">
+        MATCH B-${i+1}
+      </div>
+
+      <div class="match-row">
+
+        <div class="team-name">
+          ${match[0]}
+        </div>
+
+        <input
+          class="score"
+          type="number"
+          min="0"
+          placeholder="0">
+
+        <div class="team-name">
+          ${match[1]}
+        </div>
+
+      </div>
+
+    </div>
+
+  `);
+
+});
+
+</script>
+
+</section>
+
+
+<!-- =====================================================
+     PERINGKAT
+===================================================== -->
+
+<section id="ranking" class="page">
+
+  <div class="card">
+
+    <h2>📊 PERINGKAT GROUP</h2>
+
+    <div class="info">
+      Semua data peringkat diisi secara manual.
+      Anda dapat mengubah MP, W, D, L dan PTS sesuai
+      hasil pertandingan.
+    </div>
+
+  </div>
+
+
+  <div class="group-title">
+    🔵 GROUP A
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>TEAM</th>
+          <th>MP</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>PTS</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>1</td>
+          <td>TEAM 01</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>TEAM 02</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+        <tr>
+          <td>3</td>
+          <td>TEAM 03</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+        <tr>
+          <td>4</td>
+          <td>TEAM 04</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+        <tr>
+          <td>5</td>
+          <td>TEAM 05</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <div class="group-title">
+    🟡 GROUP B
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>TEAM</th>
+          <th>MP</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>PTS</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>1</td>
+          <td>TEAM 06</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>TEAM 07</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+        <tr>
+          <td>3</td>
+          <td>TEAM 08</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+        <tr>
+          <td>4</td>
+          <td>TEAM 09</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+        <tr>
+          <td>5</td>
+          <td>TEAM 10</td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+          <td><input placeholder="0"></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PLAYOFF
+===================================================== -->
+
+<section id="playoff" class="page">
+
+  <div class="card">
+
+    <h2>🔥 PLAYOFF</h2>
+
+    <div class="info">
+      Masukkan sendiri tim yang lolos ke playoff.
+    </div>
+
+    <div class="playoff-grid">
+
+      <div class="bracket">
+
+        <h3>SEMIFINAL 1</h3>
+
+        <input placeholder="TEAM / PEMAIN 1">
+
+        <div class="vs">VS</div>
+
+        <input placeholder="TEAM / PEMAIN 2">
+
+        <label>SKOR</label>
+        <input type="number" placeholder="0">
+
+        <label>SKOR</label>
+        <input type="number" placeholder="0">
+
+      </div>
+
+
+      <div class="bracket">
+
+        <h3>SEMIFINAL 2</h3>
+
+        <input placeholder="TEAM / PEMAIN 1">
+
+        <div class="vs">VS</div>
+
+        <input placeholder="TEAM / PEMAIN 2">
+
+        <label>SKOR</label>
+        <input type="number" placeholder="0">
+
+        <label>SKOR</label>
+        <input type="number" placeholder="0">
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SAVAGE
+===================================================== -->
+
+<section id="savage" class="page">
+
+  <div class="card">
+
+    <h2>💥 SAVAGE</h2>
+
+    <label>
+      Nama Player
+      <input placeholder="Nama Player">
+    </label>
+
+    <label>
+      Nama Team
+      <input placeholder="Nama Team">
+    </label>
+
+    <label>
+      Jumlah Savage
+      <input type="number" placeholder="0">
+    </label>
+
+    <button class="btn">
+      SIMPAN DATA SAVAGE
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL
+===================================================== -->
+
+<section id="final" class="page">
+
+  <div class="card">
+
+    <h2>🏆 GRAND FINAL</h2>
+
+    <div class="final-box">
+
+      <input placeholder="TEAM FINAL 1">
+
+      <div class="vs">
+        VS
+      </div>
+
+      <input placeholder="TEAM FINAL 2">
+
+      <label>
+        SKOR TEAM 1
+        <input type="number" placeholder="0">
+      </label>
+
+      <label>
+        SKOR TEAM 2
+        <input type="number" placeholder="0">
+      </label>
+
+      <div class="champion">
+
+        🏆 JUARA TOURNAMENT
+
+        <div class="champion-name">
+          TULIS NAMA JUARA
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MVP
+===================================================== -->
+
+<section id="mvp" class="page">
+
+  <div class="card">
+
+    <h2>⭐ MVP TOURNAMENT</h2>
+
+    <div class="final-box">
+
+      <div style="font-size:50px">
+        🏆
+      </div>
+
+      <input placeholder="NAMA MVP">
+
+      <input placeholder="NAMA TEAM">
+
+      <label>
+        Keterangan / Prestasi
+        <input placeholder="Contoh: Player terbaik tournament">
+      </label>
+
+      <button class="btn">
+        SIMPAN MVP
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</div>
+
+
+<script>
+
+function showPage(page,button){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(section=>{
+      section.classList.remove("active");
+    });
+
+  document
+    .getElementById(page)
+    .classList.add("active");
+
+  document
+    .querySelectorAll("nav button")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+</script>
+
+</body>
+</html>
 ```
